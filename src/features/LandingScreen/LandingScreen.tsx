@@ -1,5 +1,6 @@
 import React, { Dispatch, FC, SetStateAction } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { WwButton } from "../../components/WwButton";
 
 export type LandingScreenProps = {
@@ -8,6 +9,7 @@ export type LandingScreenProps = {
 
 export const LandingScreen: FC<LandingScreenProps> = ({ setIsLanding }) => {
     return <View style={styles.container}>
+        <Icon name="rocket" size={30} color="#900" />
         <Text style={styles.welcome}>welcome to</Text>
         <Text style={styles.werewolf}>werewolf</Text>
         <WwButton text="Continue" onPress={() => setIsLanding(false)} />

@@ -1,3 +1,4 @@
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import {
   Text,
@@ -5,9 +6,11 @@ import {
 } from 'react-native';
 
 const App = () => {
-  return <View>
-    <Text>First screen</Text>
-  </View>
+  return <NavigationContainer>
+    <View>
+      <Text>First screen</Text>
+    </View>
+  </NavigationContainer>
 };
 
 export default App;

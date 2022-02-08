@@ -6,11 +6,11 @@ export type LandingScreenProps = {
     setIsLanding: Dispatch<SetStateAction<boolean>>
 }
 
-export const LandingScreen: FC<LandingScreenProps> = () => {
+export const LandingScreen: FC<LandingScreenProps> = ({ setIsLanding }) => {
     return <View style={styles.container}>
         <Text style={styles.welcome}>welcome to</Text>
         <Text style={styles.werewolf}>werewolf</Text>
-        <WwButton text="Continue" onPress={() => console.log("Hello")} />
+        <WwButton text="Continue" onPress={() => setIsLanding(false)} />
     </View>
 }
 

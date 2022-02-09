@@ -4,7 +4,8 @@ import * as React from 'react';
 import { FC, useState } from 'react';
 import { Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Header, LandingScreen, useAppTranslation } from "./src/features";
+import Icon from 'react-native-vector-icons/Ionicons';
+import { Header, LandingScreen } from "./src/features";
 
 function HomeScreen() {
   return (
@@ -30,8 +31,6 @@ const App: FC = () => {
 
   const [ isLanding, setIsLanding ] = useState<boolean>(true);
 
-  const { t } = useAppTranslation();
-
   if(isLanding) return <LandingScreen setIsLanding={setIsLanding} />
 
   return (
@@ -39,11 +38,26 @@ const App: FC = () => {
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
-            header: () => <Header route={route} />
+            header: () => <Header route={route} />,
+            tabBarStyle: {
+              backgroundColor: "black"
+            },
+            tabBarActiveTintColor: '#42b4ff',
+            tabBarInactiveTintColor: 'white',
           })}
           >
-          <Tab.Screen name="State of the game" component={HomeScreen} />
-          <Tab.Screen name="Settings" component={SettingsScreen} />
+          <Tab.Screen options={() => ({
+            tabBarIcon: ({ focused }) => {
+              if(focused) return <Icon name='home' color="#42b4ff" size={24} />
+              return <Icon name='home-outline' color="white" size={24} />
+            },
+          })} name="State of the game" component={HomeScreen} />
+          <Tab.Screen options={() => ({
+            tabBarIcon: ({ focused }) => {
+              if(focused) return <Icon name='ios-settings' color="#42b4ff" size={24} />
+              return <Icon name='ios-settings-outline' color="white" size={24} />
+            },
+          })} name="Settings" component={SettingsScreen} />
         </Tab.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

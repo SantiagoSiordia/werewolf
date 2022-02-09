@@ -1,18 +1,20 @@
 import React, { Dispatch, FC, SetStateAction } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { WwButton } from "../../components/WwButton";
+import { useAppTranslation } from "../translations";
 
 export type LandingScreenProps = {
     setIsLanding: Dispatch<SetStateAction<boolean>>
 }
 
 export const LandingScreen: FC<LandingScreenProps> = ({ setIsLanding }) => {
+
+    const { t } = useAppTranslation()
+
     return <View style={styles.container}>
-        <Icon name="rocket" size={30} color="#900" />
-        <Text style={styles.welcome}>welcome to</Text>
-        <Text style={styles.werewolf}>werewolf</Text>
-        <WwButton text="Continue" onPress={() => setIsLanding(false)} />
+        <Text style={styles.welcome}>{t("landing.welcome to")}</Text>
+        <Text style={styles.werewolf}>{t("app.title")}</Text>
+        <WwButton text={t("general purpose.continue")} onPress={() => setIsLanding(false)} />
     </View>
 }
 

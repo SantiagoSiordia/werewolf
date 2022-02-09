@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.werewolf">
+  package="com.santisiordia.werewolf">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

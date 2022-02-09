@@ -8,16 +8,18 @@ import { Header, LandingScreen, useAppTranslation } from "./src/features";
 
 function HomeScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home!</Text>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', 
+    backgroundColor: "black" }}>
+      <Text style={{ color: "white" }}>Home!</Text>
     </View>
   );
 }
 
 function SettingsScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', 
+    backgroundColor: "black" }}>
+      <Text style={{ color: "white" }}>Settings!</Text>
     </View>
   );
 }

@@ -1,4 +1,4 @@
-package com.werewolf;
+package com.santisiordia.werewolf;
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
 

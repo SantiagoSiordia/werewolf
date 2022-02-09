@@ -27,19 +27,22 @@ const styles = StyleSheet.create({
         width: "100%",
         justifyContent: "center",
         alignSelf: "center",
-        padding: 16
+        padding: 16,
+        backgroundColor: "black"
     },
     title: {
         fontSize: 48,
         width: "100%",
         textAlign: "center",
         textTransform: "uppercase",
-        letterSpacing: 4
+        letterSpacing: 4,
+        color: "white"
     },
     screenName: {
         fontSize: 14,
         width: "100%",
         textAlign: "center",
-        textTransform: "uppercase"
+        textTransform: "uppercase",
+        color: "white"
     }
 })

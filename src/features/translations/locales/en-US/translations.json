@@ -3,9 +3,14 @@
     "title": "werewolf"
   },
   "general purpose": {
-    "continue": "continue"
+    "continue": "continue",
+    "game balance": "game balance"
   },
   "landing": {
     "welcome to": "welcome to"
+  },
+  "screens": {
+    "State of the game": "state of the game",
+    "Settings": "settings"
   }
 }

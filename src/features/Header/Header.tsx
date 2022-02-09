@@ -12,12 +12,14 @@ export const Header: FC<HeaderProps> = ({ route }) => {
 
     const { t } = useAppTranslation();
 
+    console.log(t(`screens.${route.name}`))
+
     return <SafeAreaView style={styles.container}>
         <Text style={styles.title}>
             {t("app.title")}
         </Text>
         <Text style={styles.screenName}>
-            {route.name}
+            {t(`screens.${route.name}`)}
         </Text>
     </SafeAreaView>
 }

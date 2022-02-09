@@ -1,0 +1,11 @@
+{
+  "app": {
+    "title": "werewolf"
+  },
+  "general purpose": {
+    "continue": "continuar"
+  },
+  "landing": {
+    "welcome to": "bienvenido a"
+  }
+}

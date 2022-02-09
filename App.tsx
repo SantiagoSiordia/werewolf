@@ -3,7 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import * as React from 'react';
 import { FC, useState } from 'react';
 import { Text, View } from 'react-native';
-import { LandingScreen } from "./src/features";
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Header, LandingScreen, useAppTranslation } from "./src/features";
 
 function HomeScreen() {
   return (
@@ -27,15 +28,23 @@ const App: FC = () => {
 
   const [ isLanding, setIsLanding ] = useState<boolean>(true);
 
+  const { t } = useAppTranslation();
+
   if(isLanding) return <LandingScreen setIsLanding={setIsLanding} />
 
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            header: () => <Header route={route} />
+          })}
+          >
+          <Tab.Screen name="State of the game" component={HomeScreen} />
+          <Tab.Screen name="Settings" component={SettingsScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 

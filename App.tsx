@@ -2,28 +2,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import * as React from 'react';
 import { FC, useState } from 'react';
-import { Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Header, LandingScreen } from "./src/features";
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', 
-    backgroundColor: "black" }}>
-      <Text style={{ color: "white" }}>Home!</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', 
-    backgroundColor: "black" }}>
-      <Text style={{ color: "white" }}>Settings!</Text>
-    </View>
-  );
-}
+import { Header, HomeScreen, LandingScreen, SettingsScreen } from "./src/features";
 
 const Tab = createBottomTabNavigator();
 

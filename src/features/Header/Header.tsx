@@ -17,7 +17,7 @@ export const Header: FC<HeaderProps> = ({ route }) => {
             {t("app.title")}
         </Text>
         <Text style={styles.screenName}>
-            {route.name}
+            {t(`screens.${route.name}`)}
         </Text>
     </SafeAreaView>
 }

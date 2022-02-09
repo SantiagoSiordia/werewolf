@@ -5,16 +5,7 @@ import { FC, useState } from 'react';
 import { Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Header, LandingScreen } from "./src/features";
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', 
-    backgroundColor: "black" }}>
-      <Text style={{ color: "white" }}>Home!</Text>
-    </View>
-  );
-}
+import { Header, Home, LandingScreen } from "./src/features";
 
 function SettingsScreen() {
   return (
@@ -51,7 +42,7 @@ const App: FC = () => {
               if(focused) return <Icon name='home' color="#42b4ff" size={24} />
               return <Icon name='home-outline' color="white" size={24} />
             },
-          })} name="State of the game" component={HomeScreen} />
+          })} name="State of the game" component={Home} />
           <Tab.Screen options={() => ({
             tabBarIcon: ({ focused }) => {
               if(focused) return <Icon name='ios-settings' color="#42b4ff" size={24} />

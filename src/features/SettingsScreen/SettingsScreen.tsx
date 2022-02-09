@@ -1,10 +1,9 @@
 import React, { FC } from "react";
-import { StyleSheet, View } from "react-native";
-import { WwSection } from "~/src/components/WwSection";
+import { StyleSheet, Text, View } from "react-native";
 
-export const HomeScreen: FC = () => {
+export const SettingsScreen: FC = () => {
     return <View style={{ backgroundColor: "black", flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <WwSection />
+        <Text style={styles.text}>SettingsScreen</Text>
     </View>
 }
 

@@ -2,19 +2,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import * as React from 'react';
 import { FC, useState } from 'react';
-import { Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Header, Home, LandingScreen } from "./src/features";
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', 
-    backgroundColor: "black" }}>
-      <Text style={{ color: "white" }}>Settings!</Text>
-    </View>
-  );
-}
+import { Header, HomeScreen, LandingScreen, SettingsScreen } from "./src/features";
 
 const Tab = createBottomTabNavigator();
 
@@ -42,7 +32,7 @@ const App: FC = () => {
               if(focused) return <Icon name='home' color="#42b4ff" size={24} />
               return <Icon name='home-outline' color="white" size={24} />
             },
-          })} name="State of the game" component={Home} />
+          })} name="State of the game" component={HomeScreen} />
           <Tab.Screen options={() => ({
             tabBarIcon: ({ focused }) => {
               if(focused) return <Icon name='ios-settings' color="#42b4ff" size={24} />

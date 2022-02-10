@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "81888852443",
+    "project_id": "santi-werewolf",
+    "storage_bucket": "santi-werewolf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:81888852443:android:e8f60cbeadcf292ce4cffe",
+        "android_client_info": {
+          "package_name": "com.santisiordia.werewolf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "81888852443-j2u2tvf48pu7io0jpeqqpogpvd0t7k2v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhsZ3f9KIWKn6GTFOJsQ0UVoxWh_quuKQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "81888852443-j2u2tvf48pu7io0jpeqqpogpvd0t7k2v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -750,6 +750,8 @@ PODS:
     - React-jsi (= 0.67.2)
     - React-logger (= 0.67.2)
     - React-perflogger (= 0.67.2)
+  - RNCAsyncStorage (1.16.0):
+    - React-Core
   - RNFBApp (14.3.1):
     - Firebase/CoreOnly (= 8.11.0)
     - React-Core
@@ -821,6 +823,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBFirestore (from `../node_modules/@react-native-firebase/firestore`)"
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -918,6 +921,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/runtimeexecutor"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNCAsyncStorage:
+    :path: "../node_modules/@react-native-async-storage/async-storage"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBFirestore:
@@ -986,6 +991,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: 99c7f67fba7a5ade46e98e870c6ff2444484f995
   React-runtimeexecutor: 2450b43df7ffe8e805a0b3dcb2abd4282f1f1836
   ReactCommon: d98c6c96b567f9b3a15f9fd4cc302c1eda8e3cf2
+  RNCAsyncStorage: 848b2c311517837ed36b92aa9b2f40ae3b5812ba
   RNFBApp: 227358730432d119d9b76ed33eba9e2306a9d85a
   RNFBFirestore: 1497909ed965c98a73501411d752b579768ff5f1
   RNScreens: d6da2b9e29cf523832c2542f47bf1287318b1868

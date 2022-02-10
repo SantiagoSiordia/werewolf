@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { WwSection } from "~/src/components/WwSection";
 import { useGame } from "~/src/services";
 import { useAppTranslation } from "..";
@@ -17,25 +17,45 @@ export const HomeScreen: FC = () => {
         <Text>is error</Text>
     </View>
 
-    console.log(game)
+    console.log(game);
 
-    return <View style={{ backgroundColor: "black", flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <WwSection title={t("general purpose.game balance")} displayNumber={8}>
-            <Text style={styles.text}>Hello</Text>
-            <Text style={styles.text}>Hello</Text>
-            <Text style={styles.text}>Hello</Text>
-            <Text style={styles.text}>Hello</Text>
-            <Text style={styles.text}>Hello</Text>
-            <Text style={styles.text}>Hello</Text>
-            <Text style={styles.text}>Hello</Text>
-            <Text style={styles.text}>Hello</Text>
-            <Text style={styles.text}>Hello</Text>
-        </WwSection>
-    </View>
+    return <ScrollView style={{ flex: 1, backgroundColor: "black"}} contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}>
+            <WwSection title={t("general purpose.game balance")} displayNumber={8}>
+            </WwSection>
+            <WwSection title={t("general purpose.total number of players")} displayNumber={8}>
+            </WwSection>
+            <WwSection title={t("general purpose.current number of players")} displayNumber={8}>
+            </WwSection>
+            <WwSection title={t("general purpose.phase")} displayNumber={8}>
+            </WwSection>
+            <WwSection title={t("general purpose.dead players")} displayNumber={8}>
+            </WwSection>
+            <Text style={styles.playerRoles}>
+                {t("general purpose.player roles")}
+            </Text>
+            <Text style={styles.wolvesText}>
+                {t("general purpose.wolves")}
+            </Text>
+            <Text style={styles.wolvesText}>
+                {t("general purpose.villagers")}
+            </Text>
+    </ScrollView>
 }
 
 const styles = StyleSheet.create({
-    text: {
-        color: "white"
+    playerRoles: {
+        color: "white",
+        width: "100%",
+        padding: 16,
+        textTransform: "uppercase",
+        fontSize: 24,
+        fontWeight: "bold"
+    },
+    wolvesText: {
+        color: "white",
+        width: "100%",
+        paddingHorizontal: 16,
+        textTransform: "uppercase",
+        fontSize: 18,
     }
 })

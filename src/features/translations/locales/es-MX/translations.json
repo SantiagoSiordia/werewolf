@@ -4,13 +4,20 @@
   },
   "general purpose": {
     "continue": "continuar",
-    "game balance": "balance del juego"
+    "current number of players": "número actual de jugadores",
+    "dead players": "jugadores muertos",
+    "game balance": "balance del juego",
+    "phase": "fase",
+    "player roles": "roles de jugadores",
+    "total number of players": "número total de jugadores",
+    "villagers": "aldeanos",
+    "wolves": "lobos"
   },
   "landing": {
     "welcome to": "bienvenido a"
   },
   "screens": {
-    "State of the game": "estado del juego",
-    "Settings": "configuración"
+    "Settings": "configuración",
+    "State of the game": "estado del juego"
   }
 }

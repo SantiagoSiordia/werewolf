@@ -4,13 +4,20 @@
   },
   "general purpose": {
     "continue": "continue",
-    "game balance": "game balance"
+    "current number of players": "current number of players",
+    "dead players": "dead players",
+    "game balance": "game balance",
+    "phase": "phase",
+    "player roles": "player roles",
+    "total number of players": "total number of players",
+    "villagers": "villagers",
+    "wolves": "wolves"
   },
   "landing": {
     "welcome to": "welcome to"
   },
   "screens": {
-    "State of the game": "state of the game",
-    "Settings": "settings"
+    "Settings": "settings",
+    "State of the game": "state of the game"
   }
 }

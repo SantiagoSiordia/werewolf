@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         width: "100%",
         borderBottomWidth: 1,
         borderColor: "white",
-        marginTop: 8
+        marginVertical: 16
     },
     numberAndArrowContainer: {
         flexDirection: "row",

@@ -5,7 +5,8 @@
   "create new game": {
     "create new game": "create new game",
     "keys": {
-      "body": "There's currently no games created. To create a new game you just have to press the button."
+      "body": "There's currently no games created. To create a new game you just have to press the button.",
+      "settings instructions": "It is necessary to create a new game to modify it in this screen, go to the main screen to create a new game!."
     }
   },
   "error": {

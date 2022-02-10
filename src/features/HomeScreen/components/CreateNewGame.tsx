@@ -61,16 +61,17 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     },
     title: {
-        color: "white",
-        fontSize: 18,
         fontWeight: "bold",
-        textTransform: "uppercase",
-        width: "100%"
+        width: "100%",
+        color: "white",
+        fontSize: 24,
+        textTransform: "uppercase"
     },
     body: {
         color: "white",
-        fontSize: 14,
+        fontSize: 16,
         width: "100%",
-        marginVertical: 16
+        marginVertical: 16,
+        textAlign: "justify"
     }
 })

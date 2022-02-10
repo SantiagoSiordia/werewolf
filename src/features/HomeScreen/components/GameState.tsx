@@ -6,6 +6,7 @@ import { useGame } from "~/src/services";
 import { removeItemFromAsyncStorage } from "~/src/services/async-storage";
 import { QUERIES } from "~/src/services/queries/QUERIES";
 import { useAppTranslation } from "../..";
+import { LoadingScreen } from "../../LoadingScreen";
 
 export interface GameStateProps {
     gameKey: string;
@@ -28,9 +29,7 @@ export const GameState: FC<GameStateProps> = ({ gameKey }) => {
         }
     }
 
-    if(isLoadingGame) return <View>
-        <Text>is loading</Text>
-    </View>
+    if(isLoadingGame) return <LoadingScreen message={t("general purpose.game")} />
 
     if(isGameError) return <View>
         <Text>is error</Text>

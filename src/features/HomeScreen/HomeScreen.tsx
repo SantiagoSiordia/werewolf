@@ -16,7 +16,7 @@ export const HomeScreen: FC = () => {
         <Text>is error</Text>
     </View>
 
-    if(gameKey === null) return <CreateNewGame />
+    if(gameKey === null || gameKey === undefined) return <CreateNewGame />
 
     return <GameState gameKey={gameKey} />
 }

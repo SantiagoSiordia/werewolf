@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import { ScrollView, StyleSheet, Text } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { useQueryClient } from "react-query";
 import { WwButton, WwSection } from "~/src/components";
 import { useGame } from "~/src/services";
-import { storeInAsyncStorage } from "~/src/services/async-storage";
+import { removeItemFromAsyncStorage } from "~/src/services/async-storage";
 import { QUERIES } from "~/src/services/queries/QUERIES";
 import { useAppTranslation } from "../..";
 
@@ -13,19 +13,33 @@ export interface GameStateProps {
 
 export const GameState: FC<GameStateProps> = ({ gameKey }) => {
 
-    const { t } = useAppTranslation()
+    const { t } = useAppTranslation();
 
     const { data: game, isLoading: isLoadingGame, isError: isGameError } = useGame(gameKey);
 
     const queryClient = useQueryClient();
 
-    const handleDeleteGame = () => {
-        storeInAsyncStorage(QUERIES.GAME_KEY, null).then(() => {
-            queryClient.invalidateQueries(QUERIES.GAME_KEY)
-        }).catch(console.log)
+    const handleDeleteGame = async () => {
+        try {
+            await removeItemFromAsyncStorage(QUERIES.GAME_KEY);
+            queryClient.invalidateQueries(QUERIES.GAME_KEY);
+        } catch (error) {
+            throw error
+        }
     }
 
+    if(isLoadingGame) return <View>
+        <Text>is loading</Text>
+    </View>
+
+    if(isGameError) return <View>
+        <Text>is error</Text>
+    </View>
+
     return <ScrollView style={styles.scrollView} contentContainerStyle={styles.container}>
+        <Text style={{ color: "white", width: "100%", fontWeight: "bold", textTransform: "capitalize", marginBottom: 16 }}>
+            {t("general purpose.moderator")}: {game?.moderator}
+        </Text>
         <WwSection title={t("general purpose.game balance")} displayNumber={8}>
         </WwSection>
         <WwSection title={t("general purpose.total number of players")} displayNumber={8}>

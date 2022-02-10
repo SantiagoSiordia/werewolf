@@ -5,7 +5,7 @@ import { QUERIES } from './QUERIES';
 export const useGame = (
     gameId: string
   ) => {
-    return useQuery(QUERIES.GAMES, () => getGame("gameId"), {
+    return useQuery(QUERIES.GAME, () => getGame(gameId), {
       staleTime: 30000,
     });
 }

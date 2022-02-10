@@ -12,10 +12,13 @@ export const CreateNewGame: FC = () => {
 
     const queryClient = useQueryClient();
 
-    const handleStoreGameKey = () => {
-        storeInAsyncStorage(QUERIES.GAME_KEY, "i3DrhFPErA8bUDU4gNKO").then(() => {
-            queryClient.invalidateQueries(QUERIES.GAME_KEY)
-        }).catch(console.log)
+    const handleStoreGameKey = async () => {
+        try {
+            await storeInAsyncStorage(QUERIES.GAME_KEY, "i3DrhFPErA8bUDU4gNKO");
+            queryClient.invalidateQueries(QUERIES.GAME_KEY);
+        } catch (error) {
+            throw error
+        }
     }
 
     return <View style={styles.container}>

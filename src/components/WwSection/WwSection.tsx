@@ -36,8 +36,7 @@ export const WwSection: FC<WwSectionProps> = ({
 const styles = StyleSheet.create({
     container: {
         width: "100%",
-        justifyContent: "space-between",
-        paddingHorizontal: 16
+        justifyContent: "space-between"
     },
     pressable: {
         flexDirection: "row",

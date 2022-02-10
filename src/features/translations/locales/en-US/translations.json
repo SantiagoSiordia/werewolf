@@ -2,11 +2,19 @@
   "app": {
     "title": "werewolf"
   },
+  "create new game": {
+    "create new game": "create new game",
+    "keys": {
+      "body": "There's currently no games created. To create a new game you just have to press the button."
+    }
+  },
   "general purpose": {
     "change language": "change language",
     "continue": "continue",
+    "create new game": "create new game",
     "current number of players": "current number of players",
     "dead players": "dead players",
+    "delete": "delete",
     "game balance": "game balance",
     "phase": "phase",
     "player roles": "player roles",

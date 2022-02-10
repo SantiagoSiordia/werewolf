@@ -2,11 +2,12 @@ import React, { FC } from "react";
 import { Pressable, PressableProps, StyleSheet, Text } from "react-native";
 import Icon from 'react-native-vector-icons/AntDesign';
 
-type buttonVariants = "black" | "blue"
+type buttonVariants = "black" | "blue" | "red"
 
 const backgroundColors: Record<buttonVariants, string> = {
     black: "#000000",
-    blue: "#42b4ff"
+    blue: "#42b4ff",
+    red: "#db324d"
 }
 
 export type WwButtonProps = PressableProps & {

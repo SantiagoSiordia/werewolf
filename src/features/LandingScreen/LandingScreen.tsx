@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
         width: "100%",
         backgroundColor: "black",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        padding: 16
     },
     welcome: {
         fontSize: 16,

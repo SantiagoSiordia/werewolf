@@ -13,7 +13,7 @@ export const SettingsScreen: FC = () => {
 
     const handleToggleLanguage = () => i18n.changeLanguage(newLanguage[i18n.language]);
     
-    return <View style={{ backgroundColor: "black", flex: 1, justifyContent: "center", alignItems: "center" }}>
+    return <View style={styles.container}>
         <Text style={styles.text}>SettingsScreen</Text>
         <WwButton text={t("general purpose.change language")} onPress={handleToggleLanguage} variant="blue" />
     </View>
@@ -22,5 +22,6 @@ export const SettingsScreen: FC = () => {
 const styles = StyleSheet.create({
     text: {
         color: "white"
-    }
+    },
+    container: { backgroundColor: "black", flex: 1, justifyContent: "center", alignItems: "center", padding: 16 }
 })

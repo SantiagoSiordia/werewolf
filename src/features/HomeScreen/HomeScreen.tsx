@@ -19,7 +19,7 @@ export const HomeScreen: FC = () => {
 
     console.log(game);
 
-    return <ScrollView style={{ flex: 1, backgroundColor: "black"}} contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}>
+    return <ScrollView style={styles.scrollView} contentContainerStyle={styles.container}>
             <WwSection title={t("general purpose.game balance")} displayNumber={8}>
             </WwSection>
             <WwSection title={t("general purpose.total number of players")} displayNumber={8}>
@@ -47,6 +47,8 @@ export const HomeScreen: FC = () => {
 }
 
 const styles = StyleSheet.create({
+    scrollView: { flex: 1, backgroundColor: "black"},
+    container: { justifyContent: "center", alignItems: "center" },
     playerRoles: {
         color: "white",
         width: "100%",

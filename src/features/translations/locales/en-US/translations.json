@@ -3,6 +3,7 @@
     "title": "werewolf"
   },
   "general purpose": {
+    "change language": "change language",
     "continue": "continue",
     "current number of players": "current number of players",
     "dead players": "dead players",

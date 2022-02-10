@@ -33,10 +33,14 @@ export const HomeScreen: FC = () => {
             <Text style={styles.playerRoles}>
                 {t("general purpose.player roles")}
             </Text>
-            <Text style={styles.wolvesText}>
+            <Text style={StyleSheet.flatten([styles.teamText, {
+                color: "#db324d"
+            }])}>
                 {t("general purpose.wolves")}
             </Text>
-            <Text style={styles.wolvesText}>
+            <Text style={StyleSheet.flatten([styles.teamText, {
+                color: "#42b4ff"
+            }])}>
                 {t("general purpose.villagers")}
             </Text>
     </ScrollView>
@@ -51,11 +55,12 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: "bold"
     },
-    wolvesText: {
+    teamText: {
         color: "white",
         width: "100%",
         paddingHorizontal: 16,
         textTransform: "uppercase",
         fontSize: 18,
+        fontWeight: "bold"
     }
 })

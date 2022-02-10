@@ -1,16 +1,29 @@
 import React, { FC } from "react";
-import { Pressable, PressableProps, StyleSheet, Text, View } from "react-native";
+import { Pressable, PressableProps, StyleSheet, Text } from "react-native";
 import Icon from 'react-native-vector-icons/AntDesign';
 
-export type WwButtonProps = PressableProps & {
-    text: string
+type buttonVariants = "black" | "blue"
+
+const backgroundColors: Record<buttonVariants, string> = {
+    black: "#000000",
+    blue: "#42b4ff"
 }
 
-export const WwButton: FC<WwButtonProps> = ({ text, ...pressableProps }) => {
-    return <Pressable style={styles.container} {...pressableProps}>
-        <View style={{ width: 16 }} />
+export type WwButtonProps = PressableProps & {
+    text: string,
+    icon?: boolean,
+    variant?: buttonVariants,
+}
+
+export const WwButton: FC<WwButtonProps> = ({ text, icon = false, variant = "black", ...pressableProps }) => {
+    return <Pressable style={StyleSheet.flatten([
+        styles.container,
+        {
+            backgroundColor: backgroundColors[variant]
+        }
+    ])} {...pressableProps}>
         <Text style={styles.text}>{text}</Text>
-        <Icon name="arrowright" color="white" size={16} />
+        {icon && <Icon name="arrowright" color="white" size={16} />}
     </Pressable>
 }
 
@@ -19,11 +32,14 @@ const styles = StyleSheet.create({
         padding: 16,
         flexDirection: "row",
         width: "100%",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        borderRadius: 8
     },
     text: {
         color: "white",
         fontSize: 16,
         textTransform: "uppercase",
+        textAlign: "center",
+        width: "100%"
     }
 })

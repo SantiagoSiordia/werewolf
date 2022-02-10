@@ -14,7 +14,7 @@ export const LandingScreen: FC<LandingScreenProps> = ({ setIsLanding }) => {
     return <View style={styles.container}>
         <Text style={styles.welcome}>{t("landing.welcome to")}</Text>
         <Text style={styles.werewolf}>{t("app.title")}</Text>
-        <WwButton text={t("general purpose.continue")} onPress={() => setIsLanding(false)} />
+        <WwButton text={t("general purpose.continue")} onPress={() => setIsLanding(false)} icon />
     </View>
 }
 

@@ -8,6 +8,14 @@
       "body": "There's currently no games created. To create a new game you just have to press the button."
     }
   },
+  "error": {
+    "are you connected to the internet?": "Are you connected to the internet?",
+    "keys": {
+      "game": "There was a problem creating or reading your game. Try again.",
+      "gameKey": "There was a problem creating or reading your game key. Try again."
+    },
+    "oops!": "oops!"
+  },
   "general purpose": {
     "change language": "change language",
     "continue": "continue",
@@ -17,6 +25,7 @@
     "delete": "delete",
     "game": "game",
     "game balance": "game balance",
+    "game key": "game key",
     "loading": "loading",
     "moderator": "moderator",
     "phase": "phase",

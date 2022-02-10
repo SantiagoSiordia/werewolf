@@ -8,6 +8,14 @@
       "body": "Actualmente no hay ningún juego creado. Para crear un nuevo juego solamente en necesario presionar el botón."
     }
   },
+  "error": {
+    "are you connected to the internet?": "¿Estás conectado a internet?",
+    "keys": {
+      "game": "Hubo un problema generando o leyendo tu juego. Intenta otra vez.",
+      "gameKey": "Hubo un problema generando o leyendo tu llave de juego. Intenta otra vez."
+    },
+    "oops!": "ups!"
+  },
   "general purpose": {
     "change language": "cambiar idioma",
     "continue": "continuar",
@@ -17,6 +25,7 @@
     "delete": "borrar",
     "game": "juego",
     "game balance": "balance del juego",
+    "game key": "llave de juego",
     "loading": "cargando",
     "moderator": "moderador",
     "phase": "fase",

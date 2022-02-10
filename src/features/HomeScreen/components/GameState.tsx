@@ -1,11 +1,11 @@
 import React, { FC } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text } from "react-native";
 import { useQueryClient } from "react-query";
 import { WwButton, WwSection } from "~/src/components";
 import { useGame } from "~/src/services";
 import { removeItemFromAsyncStorage } from "~/src/services/async-storage";
 import { QUERIES } from "~/src/services/queries/QUERIES";
-import { useAppTranslation } from "../..";
+import { ErrorScreen, useAppTranslation } from "../..";
 import { LoadingScreen } from "../../LoadingScreen";
 
 export interface GameStateProps {
@@ -31,9 +31,7 @@ export const GameState: FC<GameStateProps> = ({ gameKey }) => {
 
     if(isLoadingGame) return <LoadingScreen message={t("general purpose.game")} />
 
-    if(isGameError) return <View>
-        <Text>is error</Text>
-    </View>
+    if(isGameError) return <ErrorScreen message={t("error.keys.game")} />
 
     return <ScrollView style={styles.scrollView} contentContainerStyle={styles.container}>
         <Text style={{ color: "white", width: "100%", fontWeight: "bold", textTransform: "capitalize", marginBottom: 16 }}>

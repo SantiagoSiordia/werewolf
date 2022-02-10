@@ -1,8 +1,7 @@
 import React, { FC } from "react";
 import { Text, View } from "react-native";
-import { useGameKey } from "~/src/services/queries/useGameKey";
-import { GameState } from "./components";
-import { CreateNewGame } from "./components/CreateNewGame";
+import { useGameKey } from "~/src/services";
+import { CreateNewGame, GameState } from "./components";
 
 export const HomeScreen: FC = () => {
 

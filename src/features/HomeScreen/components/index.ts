@@ -1,1 +1,3 @@
-export * from "./GameState"
+export * from "./CreateNewGame";
+export * from "./GameState";
+

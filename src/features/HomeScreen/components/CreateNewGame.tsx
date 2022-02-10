@@ -2,8 +2,7 @@ import React, { FC } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useQueryClient } from "react-query";
 import { WwButton } from "~/src/components";
-import { storeInAsyncStorage } from "~/src/services/async-storage";
-import { QUERIES } from "~/src/services/queries/QUERIES";
+import { QUERIES, storeInAsyncStorage } from "~/src/services";
 import { useAppTranslation } from "../..";
 
 export const CreateNewGame: FC = () => {

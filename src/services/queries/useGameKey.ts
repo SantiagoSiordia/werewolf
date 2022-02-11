@@ -1,6 +1,5 @@
+import { getDataFromAsyncStorage, QUERIES } from '@services';
 import { useQuery } from 'react-query';
-import { getDataFromAsyncStorage } from '../async-storage';
-import { QUERIES } from './QUERIES';
 
 const getGameKey = async () => {
     return await getDataFromAsyncStorage(QUERIES.GAME_KEY)

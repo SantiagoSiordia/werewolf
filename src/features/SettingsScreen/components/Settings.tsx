@@ -1,8 +1,8 @@
+import { WwButton } from "@components";
+import { ErrorScreen, LoadingScreen, useAppTranslation } from "@features";
+import { useGame } from "@services";
 import React, { FC } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
-import { WwButton } from "~/src/components";
-import { useGame } from "~/src/services";
-import { ErrorScreen, LoadingScreen, useAppTranslation } from "../..";
 
 export interface SettingsProps {
     gameKey: string;

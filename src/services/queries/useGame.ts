@@ -1,6 +1,5 @@
+import { getGame, QUERIES } from '@services';
 import { useQuery } from 'react-query';
-import { getGame } from '../cloud-firestore';
-import { QUERIES } from './QUERIES';
 
 export const useGame = (
     gameId: string

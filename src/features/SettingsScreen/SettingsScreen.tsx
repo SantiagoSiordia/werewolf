@@ -1,7 +1,7 @@
+import { WwButton } from "@components";
+import { useAppTranslation } from "@features";
 import React, { FC } from "react";
 import { StyleSheet, View } from "react-native";
-import { WwButton } from "~/src/components";
-import { useAppTranslation } from "..";
 import { SettingsLogic } from "./components";
 
 export const SettingsScreen: FC = () => {

@@ -21,11 +21,7 @@ module.exports = {
           '@theme': ['./src/theme'],
           '@features': ['./src/features'],
           '@components': ['./src/components'],
-          '@redux': ['./src/features/redux'],
-          '@translations': ['./src/features/translations'],
-          '@navigation': ['./src/features/navigation'],
-          '@utils': ['./src/utils'],
-          '@services': ['./src/features/services']
+          '@services': ['./src/services']
         },
       },
     ],

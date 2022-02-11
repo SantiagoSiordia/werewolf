@@ -1,6 +1,6 @@
 {
   "extends": "expo/tsconfig.base",
-  "typeRoots": ["./src/types"],
+  "typeRoots": [ "./src/types" ],
   "compilerOptions": {
     "jsx": "react-native",
     "jsxImportSource": "react",

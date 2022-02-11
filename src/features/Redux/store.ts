@@ -1,5 +1,4 @@
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Game } from '@services'
 
 export type InitialState = {
     currentGame: Game;

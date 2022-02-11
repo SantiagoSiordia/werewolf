@@ -1,7 +1,7 @@
+import { WwButton } from "@components";
+import { useAppTranslation } from "@features";
 import React, { Dispatch, FC, SetStateAction } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { WwButton } from "../../components/WwButton";
-import { useAppTranslation } from "../translations";
 
 export type LandingScreenProps = {
     setIsLanding: Dispatch<SetStateAction<boolean>>

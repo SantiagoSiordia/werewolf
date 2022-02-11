@@ -1,7 +1,7 @@
+import { useAppTranslation } from "@features";
 import React, { FC } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import * as Progress from 'react-native-progress';
-import { useAppTranslation } from "..";
 
 export interface LoadingScreenProps {
     message?: string;

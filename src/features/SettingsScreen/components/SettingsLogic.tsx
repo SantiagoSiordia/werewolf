@@ -1,6 +1,6 @@
+import { ErrorScreen, LoadingScreen, useAppTranslation } from "@features";
+import { useGameKey } from "@services";
 import React, { FC } from "react";
-import { useGameKey } from "~/src/services";
-import { ErrorScreen, LoadingScreen, useAppTranslation } from "../..";
 import { GoCreateNewGame, Settings } from "../components";
 
 export const SettingsLogic: FC = () => {

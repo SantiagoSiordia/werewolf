@@ -41,5 +41,11 @@
   "screens": {
     "Settings": "settings",
     "State of the game": "state of the game"
+  },
+  "settings": {
+    "cards": "cards",
+    "number of players": "number of players",
+    "players": "players",
+    "save changes": "save changes"
   }
 }

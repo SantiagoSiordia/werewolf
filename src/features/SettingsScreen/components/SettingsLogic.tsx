@@ -15,5 +15,5 @@ export const SettingsLogic: FC = () => {
 
     if(gameKey === null || gameKey === undefined) return <GoCreateNewGame />
 
-    return <Settings />
+    return <Settings gameKey={gameKey} />
 }

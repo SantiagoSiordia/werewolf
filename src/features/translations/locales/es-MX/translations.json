@@ -41,5 +41,11 @@
   "screens": {
     "Settings": "configuración",
     "State of the game": "estado del juego"
+  },
+  "settings": {
+    "cards": "cartas",
+    "number of players": "número de jugadores",
+    "players": "jugadores",
+    "save changes": "guardar cambios"
   }
 }

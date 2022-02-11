@@ -1,21 +1,27 @@
-name: Build Android
-on:
-  push:
-    branches: [master]
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: yarn
-
-      - name: Build Android Release
-        run: cd android && ./gradlew clean && ./gradlew bundleRelease
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: release
-          path: android/app/build/outputs/apk/release/app-release.apk
+name: PR Pipeline Workflow 
+# Execute PR Pipeline Workflow on pull requests to master
+on:  
+  pull_request:    
+    branches:      
+      - master  
+jobs:  
+  ################################
+  # Compile Job:  
+  # Install dependencies and compile debug and test source
+  ############################ 
+  compile:    
+    runs-on: ubuntu-latest    
+    steps:      
+      - name: Checkout Repo        
+        uses: actions/checkout@v2  
+     
+      - name: Set up Ruby 2.6        
+        uses: actions/setup-ruby@v1        
+        with:          
+          ruby-version: 2.6.x    
+   
+      - name: Install Dependencies        
+        run: gem install bundler && bundle install
+       
+      - name: Run Fastlane Compile Lane        
+        run: fastlane compile

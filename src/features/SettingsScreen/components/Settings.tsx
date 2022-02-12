@@ -36,6 +36,8 @@ export const Settings: FC<SettingsProps> = ({
             }} />
         </View>
         <Text style={styles.sectionTitle}>{t("settings.cards")}</Text>
+        <Text style={{ color: "white" }}>Lobos</Text>
+        <Text style={{ color: "white" }}>Aldeanos</Text>
 
         <View style={{ flex: 1 }} />
         <WwButton text={t("settings.save changes")} variant="blue" />

@@ -43,9 +43,12 @@
     "State of the game": "estado del juego"
   },
   "settings": {
+    "Drag the roles into the blanks": "Arrastra los roles a los nombres",
     "cards": "cartas",
     "number of players": "número de jugadores",
     "players": "jugadores",
-    "save changes": "guardar cambios"
+    "role assignation": "asignación de roles",
+    "save changes": "guardar cambios",
+    "selected cards": "cartas seleccionadas"
   }
 }

@@ -37,6 +37,11 @@ export const Settings: FC<SettingsProps> = ({
         </View>
         <Text style={styles.sectionTitle}>{t("settings.cards")}</Text>
 
+        <Text style={styles.sectionTitle}>{t("settings.selected cards")}</Text>
+
+        <Text style={styles.sectionTitle}>{t("settings.role assignation")}</Text>
+        <Text style={styles.instructions}>{t("settings.Drag the roles into the blanks")}</Text>
+
         <View style={{ flex: 1 }} />
         <WwButton text={t("settings.save changes")} variant="blue" />
     </View>
@@ -61,5 +66,8 @@ const styles = StyleSheet.create({
         width: "100%",
         textTransform: "uppercase",
         marginBottom: 8
+    },
+    instructions: {
+        color: "white"
     }
 })

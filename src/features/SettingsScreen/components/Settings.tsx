@@ -3,6 +3,7 @@ import { ErrorScreen, LoadingScreen, useAppTranslation } from "@features";
 import { useGame } from "@services";
 import React, { FC } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
+import { Draggable } from "./Draggable";
 
 export interface SettingsProps {
     gameKey: string;
@@ -42,6 +43,11 @@ export const Settings: FC<SettingsProps> = ({
         <Text style={styles.sectionTitle}>{t("settings.role assignation")}</Text>
         <Text style={styles.instructions}>{t("settings.Drag the roles into the blanks")}</Text>
 
+        <Draggable 
+            payload="wolf"
+            onDragStart={() => console.log("wolf")}
+        />
+
         <View style={{ flex: 1 }} />
         <WwButton text={t("settings.save changes")} variant="blue" />
     </View>
@@ -69,5 +75,5 @@ const styles = StyleSheet.create({
     },
     instructions: {
         color: "white"
-    }
+    },
 })

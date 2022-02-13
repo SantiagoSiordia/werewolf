@@ -16,6 +16,7 @@
     "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/native": "^6.0.8",
     "@reduxjs/toolkit": "^1.7.2",
+    "formik": "^2.2.9",
     "i18next": "^21.6.11",
     "react": "17.0.2",
     "react-i18next": "^11.15.4",

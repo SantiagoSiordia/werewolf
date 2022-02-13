@@ -2,19 +2,31 @@ import React, { FC } from "react";
 import { StyleSheet, Text } from "react-native";
 import { DraxView, DraxViewProps } from "react-native-drax";
 
-export type DraggableProps = DraxViewProps & {
+type DraggableVariants = "red" | "blue";
 
+const variants: Record<DraggableVariants, string> = {
+    blue: "#42b4ff",
+    red: '#600C17'
+}
+
+export type DraggableProps = DraxViewProps & {
+    text: string;
+    variant?: DraggableVariants
 }
 
 export const Draggable: FC<DraggableProps> = ({
+    text,
+    variant = "blue",
     ...draxViewProps
 }) => {
     return (
         <DraxView
-            style={StyleSheet.flatten([styles.container])}
+            style={StyleSheet.flatten([styles.container, {
+                backgroundColor: variants[variant]
+            }])}
             {...draxViewProps}
         >
-            <Text style={styles.draggableText}>Hello</Text>
+            <Text style={styles.draggableText}>{text}</Text>
         </DraxView>
     )
 }

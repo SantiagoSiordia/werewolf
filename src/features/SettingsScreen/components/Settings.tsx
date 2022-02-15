@@ -3,10 +3,11 @@ import { ErrorScreen, LoadingScreen, useAppTranslation } from "@features";
 import { useGame } from "@services";
 import { useFormik } from "formik";
 import React, { FC, useMemo } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { FlatListProps, StyleSheet, Text, View } from "react-native";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { Draggable } from "./Draggable";
+import { PlayerInput } from "./PlayerInput";
 
 export interface SettingsProps {
     gameKey: string;
@@ -27,12 +28,26 @@ export const Settings: FC<SettingsProps> = ({
 
     const { data: game, isLoading: isGameLoading, isError: isGameError } = useGame(gameKey);
 
-    const gameForm = useFormik({
+    const gameForm = useFormik<Game>({
         initialValues,
+        enableReinitialize: true,
         onSubmit: (values, helpers) => {
             console.log(JSON.stringify(values, null, 2));
         },
     });
+
+    const renderDraggables: FlatListProps<number>["renderItem"] = ({ item }) => {
+        return <View style={{ paddingRight: 8 }}>
+            <Draggable 
+                payload={{
+                    role: "wolf",
+                    color: "#db324d"
+                }}
+                text={"wolf " + item}
+                variant="blue"
+            />
+        </View>
+    }
 
     const playerInputsArray = useMemo(() => Array.from({ length: +gameForm.values.numberOfPlayers}, (_, i) => i), [gameForm.values.numberOfPlayers])
 
@@ -69,16 +84,7 @@ export const Settings: FC<SettingsProps> = ({
         <FlatList
             data={playerInputsArray}
             initialNumToRender={4}
-            renderItem={({ item }) => {
-                return <View style={{ paddingRight: 8 }}>
-                    <Draggable 
-                        payload={"wolf" + item}
-                        onDragStart={() => console.log("wolf")}
-                        text={"wolf " + item}
-                        variant="blue"
-                    />
-                </View>
-            }}
+            renderItem={renderDraggables}
             keyExtractor={(_, i) => `draggable_${i}`}
             contentContainerStyle={{ flexDirection: "row" }}
             horizontal
@@ -87,19 +93,7 @@ export const Settings: FC<SettingsProps> = ({
         />
     
         {playerInputsArray.map((_, i) => {
-            return <WwInput
-                key={`player_input_${i}`}
-                name={`${t("general purpose.player")} ${i + 1}`}
-                // @ts-expect-error
-                value={gameForm.values[`players[${i}].name`]}
-                onChangeText={gameForm.handleChange(`players[${i}].name`)}
-                onBlur={gameForm.handleBlur(`players[${i}].name`)}
-                // @ts-expect-error
-                error={gameForm.touched[`players[${i}].name`] && !!gameForm.errors[`players[${i}].name`]}
-                // @ts-expect-error
-                errorMessage={gameForm.errors[`players[${i}].name`]}
-                icon={<Icon name="person" color="#42b4ff" size={16} />}
-            />
+            return <PlayerInput key={`player_input_${i}`} gameForm={gameForm} index={i} />
         })}
         
         <View style={{ flex: 1 }} />

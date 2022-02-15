@@ -7,7 +7,7 @@ type WwInputProps = TextInputProps & {
     error?: boolean;
     errorMessage?: string;
     icon?: React.ReactElement;
-    width?: number;
+    width?: number | string;
     disableLabel?: boolean;
   };
 
@@ -58,7 +58,7 @@ export const WwInput: FC<WwInputProps> = ({
 
   const formStyles = StyleSheet.create({
     label: {
-      color: 'black',
+      color: 'white',
       fontSize: 12,
       marginLeft: 8,
     },

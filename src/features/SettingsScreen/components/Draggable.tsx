@@ -33,7 +33,6 @@ export const Draggable: FC<DraggableProps> = ({
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#600C17',
         justifyContent: "center",
         alignItems: "center",
         paddingHorizontal: 16,

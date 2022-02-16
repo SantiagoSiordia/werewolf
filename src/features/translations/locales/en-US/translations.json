@@ -29,7 +29,9 @@
     "game key": "game key",
     "loading": "loading",
     "moderator": "moderator",
+    "number": "Number",
     "phase": "phase",
+    "player": "Player",
     "player roles": "player roles",
     "total number of players": "total number of players",
     "villagers": "villagers",
@@ -43,9 +45,13 @@
     "State of the game": "state of the game"
   },
   "settings": {
+    "Drag the roles into the blanks": "Drag the roles into the blanks",
     "cards": "cards",
+    "is a": "is a",
     "number of players": "number of players",
     "players": "players",
-    "save changes": "save changes"
+    "role assignation": "role assignation",
+    "save changes": "save changes",
+    "selected cards": "selected cards"
   }
 }

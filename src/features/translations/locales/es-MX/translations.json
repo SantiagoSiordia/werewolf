@@ -29,7 +29,9 @@
     "game key": "llave de juego",
     "loading": "cargando",
     "moderator": "moderador",
+    "number": "Número",
     "phase": "fase",
+    "player": "Jugador",
     "player roles": "roles de jugadores",
     "total number of players": "número total de jugadores",
     "villagers": "aldeanos",
@@ -43,9 +45,13 @@
     "State of the game": "estado del juego"
   },
   "settings": {
+    "Drag the roles into the blanks": "Arrastra los roles a los nombres",
     "cards": "cartas",
+    "is a": "es un",
     "number of players": "número de jugadores",
     "players": "jugadores",
-    "save changes": "guardar cambios"
+    "role assignation": "asignación de roles",
+    "save changes": "guardar cambios",
+    "selected cards": "cartas seleccionadas"
   }
 }

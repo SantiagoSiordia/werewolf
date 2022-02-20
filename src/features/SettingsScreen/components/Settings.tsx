@@ -2,10 +2,10 @@ import { WwButton, WwInput } from "@components";
 import { ErrorScreen, LoadingScreen, useAppTranslation } from "@features";
 import { useGame } from "@services";
 import { useFormik } from "formik";
-import React, { FC, useMemo } from "react";
-import { FlatListProps, StyleSheet, Text, View } from "react-native";
+import React, { FC, useMemo, useState } from "react";
+import { FlatListProps, Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
-import { FlatGrid } from 'react-native-super-grid';
+import { FlatGrid } from "react-native-super-grid";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { Draggable } from "./Draggable";
 import { PlayerInput } from "./PlayerInput";
@@ -29,6 +29,8 @@ export const Settings: FC<SettingsProps> = ({
 
     const { data: game, isLoading: isGameLoading, isError: isGameError } = useGame(gameKey);
 
+    const [ selectedRoles, setSelectedRoles ] = useState<Array<string>>([]);
+
     const gameForm = useFormik<Game>({
         initialValues,
         enableReinitialize: true,
@@ -49,6 +51,16 @@ export const Settings: FC<SettingsProps> = ({
             />
         </View>
     }
+
+    const data: Array<{
+        role: string;
+        image: string;
+    }> = [
+        { role: "seer", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/seer.jpeg?alt=media&token=481617a3-cccf-4281-987d-aca90a3dbe0a" },
+        { role: "wolf", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/wolf.jpeg?alt=media&token=ba01de11-ebe8-4cee-a552-dc24d2938266" },
+        { role: "villager", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/villager.jpeg?alt=media&token=386394a0-4e59-4fe4-8b02-1aa23fe489c4" },
+        { role: "bodyguard", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/bodyguard.jpeg?alt=media&token=ec4d4a54-cb16-4390-91b6-990b1ec0465a" },
+    ]
 
     const playerInputsArray = useMemo(() => Array.from({ length: +gameForm.values.numberOfPlayers}, (_, i) => i), [gameForm.values.numberOfPlayers])
 
@@ -77,38 +89,32 @@ export const Settings: FC<SettingsProps> = ({
         </View>
 
         <Text style={styles.sectionTitle}>{t("settings.cards")}</Text>
+
+        <Text style={styles.sectionTitle}>{selectedRoles.length}</Text>
         
         <FlatGrid
             itemDimension={90}
             scrollEnabled={false}
-            data={[
-                { name: 'TURQUOISE', code: '#1abc9c' },
-                { name: 'EMERALD', code: '#2ecc71' },
-                { name: 'PETER RIVER', code: '#3498db' },
-                { name: 'AMETHYST', code: '#9b59b6' },
-                { name: 'WET ASPHALT', code: '#34495e' },
-                { name: 'GREEN SEA', code: '#16a085' },
-                { name: 'NEPHRITIS', code: '#27ae60' },
-                { name: 'BELIZE HOLE', code: '#2980b9' },
-                { name: 'WISTERIA', code: '#8e44ad' },
-                { name: 'MIDNIGHT BLUE', code: '#2c3e50' },
-                { name: 'SUN FLOWER', code: '#f1c40f' },
-                { name: 'CARROT', code: '#e67e22' },
-                { name: 'ALIZARIN', code: '#e74c3c' },
-                { name: 'CLOUDS', code: '#ecf0f1' },
-                { name: 'CONCRETE', code: '#95a5a6' },
-                { name: 'ORANGE', code: '#f39c12' },
-                { name: 'PUMPKIN', code: '#d35400' },
-                { name: 'POMEGRANATE', code: '#c0392b' },
-                { name: 'SILVER', code: '#bdc3c7' },
-                { name: 'ASBESTOS', code: '#7f8c8d' },
-            ]}
-            renderItem={({ item }) => (
-            <View style={[styles.itemContainer, { backgroundColor: item.code }]}>
-                <Text style={styles.itemName}>{item.name}</Text>
-                <Text style={styles.itemCode}>{item.code}</Text>
-            </View>
-            )}
+            data={data}
+            renderItem={({ item }) => {
+                return <Pressable onPress={() => {
+                    if (selectedRoles.includes(item.role)) {
+                        setSelectedRoles(prev => prev.filter(role => role !== item.role))
+                    } else {
+                        setSelectedRoles(prev => Array.from(new Set([...prev, item.role])))
+                    }
+                }} >
+                    <Image
+                        source={{ uri: item.image }}
+                        style={
+                            StyleSheet.flatten([styles.characterImage, {
+                                opacity: selectedRoles.includes(item.role) ? 1 : 0.5,
+                            }])
+                        }
+                    />
+                    <Text style={{ color: "white" }}>{item.role}</Text>
+                </Pressable>
+            }}
         />
 
         <Text style={styles.sectionTitle}>{t("settings.selected cards")}</Text>
@@ -188,4 +194,8 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontWeight: '600',
     },
+    characterImage: {
+        width: '100%',
+        aspectRatio: 0.75
+    }
 })

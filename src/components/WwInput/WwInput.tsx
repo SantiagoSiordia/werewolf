@@ -64,14 +64,12 @@ export const WwInput: FC<WwInputProps> = ({
     },
     inputContainer: {
       backgroundColor: 'white',
-      height: 30,
       borderRadius: 8,
       flexDirection: 'row',
       borderColor: "#42b4ff",
       borderWidth: 1
     },
     iconContainer: {
-      height: 30,
       width: "20%",
       maxWidth: 35,
       alignItems: 'center',

@@ -53,5 +53,12 @@
     "role assignation": "asignación de roles",
     "save changes": "guardar cambios",
     "selected cards": "cartas seleccionadas"
+  },
+  "roles": {
+    "hunter": "cazador",
+    "wolf": "lobo",
+    "villager": "aldeano",
+    "bodyguard": "guardaespaldas",
+    "seer": "vidente"
   }
 }

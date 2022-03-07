@@ -9,6 +9,7 @@ import { FlatGrid } from "react-native-super-grid";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { Draggable } from "./Draggable";
 import { PlayerInput } from "./PlayerInput";
+import { SelectedRolesContainer } from "./SelectedRoleQuantity";
 
 export interface SettingsProps {
     gameKey: string;
@@ -55,11 +56,14 @@ export const Settings: FC<SettingsProps> = ({
     const data: Array<{
         role: string;
         image: string;
+        maxNumber?: number;
+        minNumber?: number;
     }> = [
-        { role: "seer", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/seer.jpeg?alt=media&token=481617a3-cccf-4281-987d-aca90a3dbe0a" },
-        { role: "wolf", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/wolf.jpeg?alt=media&token=ba01de11-ebe8-4cee-a552-dc24d2938266" },
-        { role: "villager", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/villager.jpeg?alt=media&token=386394a0-4e59-4fe4-8b02-1aa23fe489c4" },
-        { role: "bodyguard", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/bodyguard.jpeg?alt=media&token=ec4d4a54-cb16-4390-91b6-990b1ec0465a" },
+        { role: "seer", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/seer.jpeg?alt=media&token=481617a3-cccf-4281-987d-aca90a3dbe0a", maxNumber: 1, minNumber: 1 },
+        { role: "wolf", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/wolf.jpeg?alt=media&token=ba01de11-ebe8-4cee-a552-dc24d2938266", minNumber: 1 },
+        { role: "villager", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/villager.jpeg?alt=media&token=386394a0-4e59-4fe4-8b02-1aa23fe489c4", minNumber: 1 },
+        { role: "bodyguard", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/bodyguard.jpeg?alt=media&token=ec4d4a54-cb16-4390-91b6-990b1ec0465a", maxNumber: 1, minNumber: 1 },
+        { role: "hunter", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/hunter.jpeg?alt=media&token=058b1776-17be-40a3-89ff-8d09f1d16284", maxNumber: 1, minNumber: 1 },
     ]
 
     const playerInputsArray = useMemo(() => Array.from({ length: +gameForm.values.numberOfPlayers}, (_, i) => i), [gameForm.values.numberOfPlayers])
@@ -89,8 +93,6 @@ export const Settings: FC<SettingsProps> = ({
         </View>
 
         <Text style={styles.sectionTitle}>{t("settings.cards")}</Text>
-
-        <Text style={styles.sectionTitle}>{selectedRoles.length}</Text>
         
         <FlatGrid
             itemDimension={90}
@@ -112,12 +114,19 @@ export const Settings: FC<SettingsProps> = ({
                             }])
                         }
                     />
-                    <Text style={{ color: "white" }}>{item.role}</Text>
+                    <Text style={{ color: "white", textTransform: 'uppercase' }}>{item.role}</Text>
                 </Pressable>
             }}
         />
 
+
+
+
         <Text style={styles.sectionTitle}>{t("settings.selected cards")}</Text>
+
+        {selectedRoles.map((role, index) => {
+            return <SelectedRolesContainer key={role + index} role={role} />
+        })}
 
         <Text style={styles.sectionTitle}>{t("settings.role assignation")}</Text>
         <Text style={styles.instructions}>{t("settings.Drag the roles into the blanks")}</Text>
@@ -197,5 +206,5 @@ const styles = StyleSheet.create({
     characterImage: {
         width: '100%',
         aspectRatio: 0.75
-    }
+    },
 })

@@ -53,5 +53,12 @@
     "role assignation": "role assignation",
     "save changes": "save changes",
     "selected cards": "selected cards"
+  },
+  "roles": {
+    "HUNTER": "hunter",
+    "wolf": "wolf",
+    "villager": "villager",
+    "bodyguard": "bodyguard",
+    "seer": "seer"
   }
 }

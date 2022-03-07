@@ -1,6 +1,6 @@
 import { WwButton, WwInput } from "@components";
 import { ErrorScreen, LoadingScreen, useAppTranslation } from "@features";
-import { useGame } from "@services";
+import { RoleCloudFirestore, useGame } from "@services";
 import { useFormik } from "formik";
 import React, { FC, useMemo, useState } from "react";
 import { FlatListProps, Image, Pressable, StyleSheet, Text, View } from "react-native";
@@ -53,17 +53,12 @@ export const Settings: FC<SettingsProps> = ({
         </View>
     }
 
-    const data: Array<{
-        role: string;
-        image: string;
-        maxNumber?: number;
-        minNumber?: number;
-    }> = [
-        { role: "seer", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/seer.jpeg?alt=media&token=481617a3-cccf-4281-987d-aca90a3dbe0a", maxNumber: 1, minNumber: 1 },
-        { role: "wolf", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/wolf.jpeg?alt=media&token=ba01de11-ebe8-4cee-a552-dc24d2938266", minNumber: 1 },
-        { role: "villager", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/villager.jpeg?alt=media&token=386394a0-4e59-4fe4-8b02-1aa23fe489c4", minNumber: 1 },
-        { role: "bodyguard", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/bodyguard.jpeg?alt=media&token=ec4d4a54-cb16-4390-91b6-990b1ec0465a", maxNumber: 1, minNumber: 1 },
-        { role: "hunter", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/hunter.jpeg?alt=media&token=058b1776-17be-40a3-89ff-8d09f1d16284", maxNumber: 1, minNumber: 1 },
+    const data: Array<RoleCloudFirestore> = [
+        { name: "seer", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/seer.jpeg?alt=media&token=481617a3-cccf-4281-987d-aca90a3dbe0a", maxPerGame: 1, minPerGame: 1, points: 7, ref: 'seer' },
+        { name: "wolf", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/wolf.jpeg?alt=media&token=ba01de11-ebe8-4cee-a552-dc24d2938266", minPerGame: 1, points: -3, ref: 'wolf' },
+        { name: "villager", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/villager.jpeg?alt=media&token=386394a0-4e59-4fe4-8b02-1aa23fe489c4", minPerGame: 1, points: 1, ref: 'villager' },
+        { name: "bodyguard", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/bodyguard.jpeg?alt=media&token=ec4d4a54-cb16-4390-91b6-990b1ec0465a", maxPerGame: 1, minPerGame: 1, points: 2, ref: 'bodyguard' },
+        { name: "hunter", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/hunter.jpeg?alt=media&token=058b1776-17be-40a3-89ff-8d09f1d16284", maxPerGame: 1, minPerGame: 1, points: 3, ref: 'hunter' },
     ]
 
     const playerInputsArray = useMemo(() => Array.from({ length: +gameForm.values.numberOfPlayers}, (_, i) => i), [gameForm.values.numberOfPlayers])
@@ -100,21 +95,21 @@ export const Settings: FC<SettingsProps> = ({
             data={data}
             renderItem={({ item }) => {
                 return <Pressable onPress={() => {
-                    if (selectedRoles.includes(item.role)) {
-                        setSelectedRoles(prev => prev.filter(role => role !== item.role))
+                    if (selectedRoles.includes(item.name)) {
+                        setSelectedRoles(prev => prev.filter(role => role !== item.name))
                     } else {
-                        setSelectedRoles(prev => Array.from(new Set([...prev, item.role])))
+                        setSelectedRoles(prev => Array.from(new Set([...prev, item.name])))
                     }
                 }} >
                     <Image
                         source={{ uri: item.image }}
                         style={
                             StyleSheet.flatten([styles.characterImage, {
-                                opacity: selectedRoles.includes(item.role) ? 1 : 0.5,
+                                opacity: selectedRoles.includes(item.name) ? 1 : 0.5,
                             }])
                         }
                     />
-                    <Text style={{ color: "white", textTransform: 'uppercase' }}>{item.role}</Text>
+                    <Text style={{ color: "white", textTransform: 'uppercase' }}>{item.name}</Text>
                 </Pressable>
             }}
         />
@@ -124,8 +119,8 @@ export const Settings: FC<SettingsProps> = ({
 
         <Text style={styles.sectionTitle}>{t("settings.selected cards")}</Text>
 
-        {selectedRoles.map((role, index) => {
-            return <SelectedRolesContainer key={role + index} role={role} />
+        {selectedRoles.map((roleRef, index) => {
+            return <SelectedRolesContainer key={roleRef + index} roleRef={roleRef} />
         })}
 
         <Text style={styles.sectionTitle}>{t("settings.role assignation")}</Text>

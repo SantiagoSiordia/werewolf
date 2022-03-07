@@ -1,36 +1,41 @@
 import React, { FC, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { useRole } from "~/src/services/queries/useRole";
 import { useAppTranslation } from "../../translations";
 
 export interface SelectedRolesContainerProps {
-    role: string;
+    roleRef: string;
 }
 
 export const SelectedRolesContainer: FC<SelectedRolesContainerProps> = ({
-    role
+    roleRef,
 }) => {
 
     const [ count, setCount ] = useState<number>(1);
     const { t } = useAppTranslation();
+    const { data: singleRole, isLoading, isError } = useRole(roleRef);
 
+    if( isLoading || isError) return null;
+
+    const isAbleToMinus = !!singleRole?.minPerGame ? count > singleRole?.minPerGame : true;
+    const isAbleToPlus = !!singleRole?.maxPerGame ? count < singleRole?.maxPerGame : true;
+    
     const handleOnMinus = () => {
-        if (count > 1) setCount(prev => prev - 1)
+        if(isAbleToMinus) setCount(prev => prev - 1)
     };
 
     const handleOnPlus = () => {
-        setCount(prev => prev + 1)
+        if(isAbleToPlus) setCount(prev => prev + 1)
     }
 
-    const isAbleToMinus = count > 1;
-
     return <View style={styles.selectedRolesContainer}>
-        <Text style={styles.roleSelectedText}>{t("roles." + role)}</Text>
+        <Text style={styles.roleSelectedText}>{t("roles." + roleRef)}</Text>
         <View style={styles.filler} />
         <View style={styles.counterContainer}>
             <AntDesign name="minuscircle" size={24} color={isAbleToMinus ? "#db324d" : "gray"} onPress={handleOnMinus} />
             <Text style={styles.counterText}>{count}</Text>
-            <AntDesign name="pluscircle" size={24} color="#42b4ff" onPress={handleOnPlus} />
+            <AntDesign name="pluscircle" size={24} color={isAbleToPlus ? "#42b4ff" : "gray"} onPress={handleOnPlus} />
         </View>
     </View>
 }

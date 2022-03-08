@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { Image, Pressable, StyleSheet, Text } from "react-native";
 import { RoleCloudFirestore } from "~/src/services";
+import { useAppTranslation } from "../../translations";
 
 export interface RoleCardProps { 
     role: RoleCloudFirestore;
@@ -13,6 +14,8 @@ export const RoleCard: FC<RoleCardProps> = ({
     setSelectedRoles,
     selectedRoles
 }) => {
+
+    const { t } = useAppTranslation(); 
     return (
         <Pressable onPress={() => {
             if (selectedRoles.includes(role.ref)) {
@@ -26,13 +29,13 @@ export const RoleCard: FC<RoleCardProps> = ({
                 style={StyleSheet.flatten([styles.characterImage, {
                     opacity: selectedRoles.includes(role.ref) ? 1 : 0.5
                 }])} />
-            <Text style={styles.roleText}>{role.ref}</Text>
+            <Text style={styles.roleText}>{t("roles." + role.ref)}</Text>
         </Pressable>
     )
 };
 
 const styles = StyleSheet.create({
-    roleText: { color: "white", textTransform: 'uppercase' },
+    roleText: { color: "white", textTransform: 'uppercase', fontSize: 8, textAlign: 'center', fontWeight: 'bold' },
     characterImage: {
         width: '100%',
         aspectRatio: 0.75

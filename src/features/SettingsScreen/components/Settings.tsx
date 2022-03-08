@@ -34,8 +34,6 @@ export const Settings: FC<SettingsProps> = ({
 
     const [ selectedRoles, setSelectedRoles ] = useState<Array<string>>([]);
 
-    console.log(selectedRoles)
-
     const gameForm = useFormik<Game>({
         initialValues,
         enableReinitialize: true,

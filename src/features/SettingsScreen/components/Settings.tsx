@@ -92,11 +92,13 @@ export const Settings: FC<SettingsProps> = ({
             }}
         />}
 
-        <Text style={styles.sectionTitle}>{t("settings.selected cards")}</Text>
+        {selectedRoles.length !== 0 && <>
+            <Text style={styles.sectionTitle}>{t("settings.selected cards")}</Text>
 
-        {selectedRoles.map((roleRef, index) => {
-            return <SelectedRolesContainer key={roleRef + index} roleRef={roleRef} />
-        })}
+            {selectedRoles.map((roleRef, index) => {
+                return <SelectedRolesContainer key={roleRef + index} roleRef={roleRef} />
+            })}
+        </>}
 
         <Text style={styles.sectionTitle}>{t("settings.role assignation")}</Text>
         <Text style={styles.instructions}>{t("settings.Drag the roles into the blanks")}</Text>

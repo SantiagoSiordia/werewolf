@@ -1,14 +1,15 @@
 import { WwButton, WwInput } from "@components";
 import { ErrorScreen, LoadingScreen, useAppTranslation } from "@features";
-import { RoleCloudFirestore, useGame } from "@services";
+import { useGame, useRoles } from "@services";
 import { useFormik } from "formik";
 import React, { FC, useMemo, useState } from "react";
-import { FlatListProps, Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { FlatListProps, StyleSheet, Text, View } from "react-native";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 import { FlatGrid } from "react-native-super-grid";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { Draggable } from "./Draggable";
 import { PlayerInput } from "./PlayerInput";
+import { RoleCard } from "./RoleCard";
 import { SelectedRolesContainer } from "./SelectedRoleQuantity";
 
 export interface SettingsProps {
@@ -29,8 +30,11 @@ export const Settings: FC<SettingsProps> = ({
     const { t } = useAppTranslation();
 
     const { data: game, isLoading: isGameLoading, isError: isGameError } = useGame(gameKey);
+    const { data: allRoles } = useRoles();
 
     const [ selectedRoles, setSelectedRoles ] = useState<Array<string>>([]);
+
+    console.log(selectedRoles)
 
     const gameForm = useFormik<Game>({
         initialValues,
@@ -52,14 +56,6 @@ export const Settings: FC<SettingsProps> = ({
             />
         </View>
     }
-
-    const data: Array<RoleCloudFirestore> = [
-        { name: "seer", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/seer.jpeg?alt=media&token=481617a3-cccf-4281-987d-aca90a3dbe0a", maxPerGame: 1, minPerGame: 1, points: 7, ref: 'seer' },
-        { name: "wolf", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/wolf.jpeg?alt=media&token=ba01de11-ebe8-4cee-a552-dc24d2938266", minPerGame: 1, points: -3, ref: 'wolf' },
-        { name: "villager", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/villager.jpeg?alt=media&token=386394a0-4e59-4fe4-8b02-1aa23fe489c4", minPerGame: 1, points: 1, ref: 'villager' },
-        { name: "bodyguard", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/bodyguard.jpeg?alt=media&token=ec4d4a54-cb16-4390-91b6-990b1ec0465a", maxPerGame: 1, minPerGame: 1, points: 2, ref: 'bodyguard' },
-        { name: "hunter", image: "https://firebasestorage.googleapis.com/v0/b/santi-werewolf.appspot.com/o/hunter.jpeg?alt=media&token=058b1776-17be-40a3-89ff-8d09f1d16284", maxPerGame: 1, minPerGame: 1, points: 3, ref: 'hunter' },
-    ]
 
     const playerInputsArray = useMemo(() => Array.from({ length: +gameForm.values.numberOfPlayers}, (_, i) => i), [gameForm.values.numberOfPlayers])
 
@@ -89,33 +85,14 @@ export const Settings: FC<SettingsProps> = ({
 
         <Text style={styles.sectionTitle}>{t("settings.cards")}</Text>
         
-        <FlatGrid
+        {allRoles !== undefined && <FlatGrid
             itemDimension={90}
             scrollEnabled={false}
-            data={data}
+            data={allRoles}
             renderItem={({ item }) => {
-                return <Pressable onPress={() => {
-                    if (selectedRoles.includes(item.name)) {
-                        setSelectedRoles(prev => prev.filter(role => role !== item.name))
-                    } else {
-                        setSelectedRoles(prev => Array.from(new Set([...prev, item.name])))
-                    }
-                }} >
-                    <Image
-                        source={{ uri: item.image }}
-                        style={
-                            StyleSheet.flatten([styles.characterImage, {
-                                opacity: selectedRoles.includes(item.name) ? 1 : 0.5,
-                            }])
-                        }
-                    />
-                    <Text style={{ color: "white", textTransform: 'uppercase' }}>{item.name}</Text>
-                </Pressable>
+                return <RoleCard setSelectedRoles={setSelectedRoles} role={item} selectedRoles={selectedRoles} />
             }}
-        />
-
-
-
+        />}
 
         <Text style={styles.sectionTitle}>{t("settings.selected cards")}</Text>
 
@@ -197,9 +174,5 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#fff',
         fontWeight: '600',
-    },
-    characterImage: {
-        width: '100%',
-        aspectRatio: 0.75
     },
 })

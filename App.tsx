@@ -2,7 +2,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import * as React from 'react';
 import { FC, useState } from 'react';
-import { DraxProvider } from 'react-native-drax';
 import 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -24,7 +23,6 @@ const App: FC = () => {
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <SafeAreaProvider>
-            <DraxProvider>
               <NavigationContainer>
                 <Tab.Navigator
                   screenOptions={({ route }) => ({
@@ -50,7 +48,6 @@ const App: FC = () => {
                   })} name="Settings" component={SettingsScreen} />
                 </Tab.Navigator>
               </NavigationContainer>
-            </DraxProvider>
         </SafeAreaProvider>
       </Provider>
     </QueryClientProvider>

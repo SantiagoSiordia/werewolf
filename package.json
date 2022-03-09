@@ -5,14 +5,14 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start",
+    "start": "export SET NODE_OPTIONS=--openssl-legacy-provider && react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
     "@babel/preset-env": "^7.1.6",
     "@react-native-async-storage/async-storage": "^1.16.0",
-    "@react-native-firebase/app": "^14.3.1",
+    "@react-native-firebase/app": "14.5.0",
     "@react-native-firebase/firestore": "^14.3.1",
     "@react-native-firebase/storage": "^14.5.0",
     "@react-navigation/bottom-tabs": "^6.2.0",
@@ -24,7 +24,6 @@
     "react-i18next": "^11.15.4",
     "react-native": "0.67.2",
     "react-native-dotenv": "^3.3.1",
-    "react-native-drax": "^0.9.3",
     "react-native-gesture-handler": "^2.2.0",
     "react-native-progress": "^5.0.0",
     "react-native-safe-area-context": "^3.3.2",

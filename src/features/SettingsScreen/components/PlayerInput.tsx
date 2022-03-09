@@ -3,7 +3,6 @@ import { useAppTranslation } from "@features";
 import { FormikProps } from "formik";
 import React, { FC, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { DraxDragWithReceiverEventData, DraxView } from "react-native-drax";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 export interface PlayerInputProps {
@@ -28,7 +27,7 @@ export const PlayerInput: FC<PlayerInputProps> = ({
         color: ""
     });
 
-    const handleOnReceiveRole = (data: DraxDragWithReceiverEventData) => {
+    const handleOnReceiveRole = (data: any) => {
         gameForm.setFieldValue(`players[${index}].role`, data.dragged.payload.role);
         setPlayerRole({ ...data.dragged.payload })
     }
@@ -50,22 +49,14 @@ export const PlayerInput: FC<PlayerInputProps> = ({
         <View style={styles.flex1} />
         <Text style={styles.isAText}>{t("settings.is a")}</Text>
         <View style={styles.flex1} />
-        <DraxView
-            style={playerRole.role === "" ? styles.draggableReceiver : StyleSheet.flatten([styles.roleAssignedReceiver, {
-                backgroundColor: playerRole.color
-            }])}
-            onReceiveDragDrop={handleOnReceiveRole}
-        >
-            <Text style={styles.receivedRoleText}>
-                {playerRole.role}
-            </Text>
-        </DraxView>
     </View>
 }
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: "row"
+        flexDirection: "row",
+        flex: 1,
+        paddingTop: 8
     },
     isAText: {
         color: "white",

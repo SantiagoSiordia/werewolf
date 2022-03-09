@@ -45,10 +45,6 @@ export const Settings: FC<SettingsProps> = ({
     const renderDraggables: FlatListProps<number>["renderItem"] = ({ item }) => {
         return <View style={{ paddingRight: 8 }}>
             <Draggable 
-                payload={{
-                    role: "wolf",
-                    color: "#db324d"
-                }}
                 text={"wolf " + item}
                 variant="blue"
             />

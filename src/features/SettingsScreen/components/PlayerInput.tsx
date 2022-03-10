@@ -35,7 +35,7 @@ export const PlayerInput: FC<PlayerInputProps> = ({
 
     const arrayOfItems = allAssignableRoles.map(element => {
         const itemDisabled = noSetRoles[element] === undefined || noSetRoles[element] === 0;
-        return { label: element, value: element, disabled: itemDisabled }
+        return { label: t("roles." + element).toUpperCase(), value: element, disabled: itemDisabled }
     });
 
     const [open, setOpen] = useState(false);

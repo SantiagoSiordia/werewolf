@@ -2,8 +2,10 @@ import { FormikProps } from "formik";
 import React, { FC, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { useDispatch } from "react-redux";
 import { useRole } from "~/src/services/queries/useRole";
 import { useAppSelector } from "../../redux";
+import { decreaseAssignableRoles, increaseAssignableRoles } from "../../redux/assignableRoles";
 import { useAppTranslation } from "../../translations";
 
 export interface SelectedRolesContainerProps {
@@ -19,19 +21,26 @@ export const SelectedRolesContainer: FC<SelectedRolesContainerProps> = ({
     const [ count, setCount ] = useState<number>(1);
     const { t } = useAppTranslation();
     const { data: singleRole, isLoading, isError } = useRole(roleRef);
+    const dispatch = useDispatch();
     const numberOfAssignableRoles = useAppSelector(state => state.assignableRoles.numberOfAssignableRoles);
 
     if( isLoading || isError) return null;
 
     const isAbleToMinus = !!singleRole?.minPerGame ? count > singleRole?.minPerGame : true;
-    const isAbleToPlus = !!singleRole?.maxPerGame ? count < singleRole?.maxPerGame : true;
+    const isAbleToPlus = (!!singleRole?.maxPerGame ? count < singleRole?.maxPerGame : true) && numberOfAssignableRoles > 0;
     
     const handleOnMinus = () => {
-        if(isAbleToMinus) setCount(prev => prev - 1)
+        if(isAbleToMinus) {
+            setCount(prev => prev - 1);
+            dispatch(increaseAssignableRoles());
+        }
     };
 
     const handleOnPlus = () => {
-        if(isAbleToPlus) setCount(prev => prev + 1)
+        if(isAbleToPlus) {
+            setCount(prev => prev + 1);
+            dispatch(decreaseAssignableRoles());
+        }
     }
 
     return <View style={styles.selectedRolesContainer}>

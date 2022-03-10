@@ -3,12 +3,12 @@ import { RoleNamesRef } from '~/src/services';
 
 export type RolesInitialState = {
     allAssignableRoles: Array<RoleNamesRef>;
-    numberOfAssignableRole: number;
+    numberOfAssignableRoles: number;
 }
 
 const initialState: RolesInitialState = {
   allAssignableRoles: [],
-  numberOfAssignableRole: 0
+  numberOfAssignableRoles: 0
 }
 
 const assignableRoles = createSlice({
@@ -18,23 +18,23 @@ const assignableRoles = createSlice({
     addAssignableRole: (state, action: PayloadAction<RoleNamesRef>) => {
       if(state.allAssignableRoles.includes(action.payload)) return;
       state.allAssignableRoles = [ ...state.allAssignableRoles, action.payload ];
-      state.numberOfAssignableRole = state.numberOfAssignableRole - 1;
+      state.numberOfAssignableRoles = state.numberOfAssignableRoles - 1;
     },
     removeAssignableRole: (state, action: PayloadAction<RoleNamesRef>) => {
       state.allAssignableRoles = state.allAssignableRoles.filter(role => role !== action.payload);
-      state.numberOfAssignableRole = state.numberOfAssignableRole + 1;
+      state.numberOfAssignableRoles = state.numberOfAssignableRoles + 1;
     },
     clearAssignableRoles: (state) => {
       state.allAssignableRoles = [];
     },
     decreaseAssignableRoles: (state) => {
-      state.numberOfAssignableRole = state.numberOfAssignableRole - 1;
+      state.numberOfAssignableRoles = state.numberOfAssignableRoles - 1;
     },
     increaseAssignableRoles: (state) => {
-      state.numberOfAssignableRole = state.numberOfAssignableRole + 1;
+      state.numberOfAssignableRoles = state.numberOfAssignableRoles + 1;
     },
     setNumberOfAssignableRoles: (state, action: PayloadAction<number>) => {
-      state.numberOfAssignableRole = action.payload
+      state.numberOfAssignableRoles = action.payload
     }
   }
 })

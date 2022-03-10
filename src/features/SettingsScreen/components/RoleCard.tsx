@@ -15,8 +15,8 @@ export const RoleCard: FC<RoleCardProps> = ({
 }) => {
 
     const allRoles = useAppSelector(state => state.assignableRoles.allAssignableRoles);
-    const numberOfAssignableRole = useAppSelector(state => state.assignableRoles.numberOfAssignableRole);
-    const areAssignableSpotsAvailable = numberOfAssignableRole > 0;
+    const numberOfAssignableRoles = useAppSelector(state => state.assignableRoles.numberOfAssignableRoles);
+    const areAssignableSpotsAvailable = numberOfAssignableRoles > 0;
 
     const dispatch = useDispatch();
 

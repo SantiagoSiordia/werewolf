@@ -3,13 +3,14 @@ import React, { FC, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useDispatch } from "react-redux";
+import { RoleNamesRef } from "~/src/services";
 import { useRole } from "~/src/services/queries/useRole";
 import { useAppSelector } from "../../redux";
 import { decreaseAssignableRoles, increaseAssignableRoles } from "../../redux/assignableRoles";
 import { useAppTranslation } from "../../translations";
 
 export interface SelectedRolesContainerProps {
-    roleRef: string;
+    roleRef: RoleNamesRef;
     gameForm: FormikProps<Game>
 }
 
@@ -32,14 +33,14 @@ export const SelectedRolesContainer: FC<SelectedRolesContainerProps> = ({
     const handleOnMinus = () => {
         if(isAbleToMinus) {
             setCount(prev => prev - 1);
-            dispatch(increaseAssignableRoles());
+            dispatch(increaseAssignableRoles(roleRef));
         }
     };
 
     const handleOnPlus = () => {
         if(isAbleToPlus) {
             setCount(prev => prev + 1);
-            dispatch(decreaseAssignableRoles());
+            dispatch(decreaseAssignableRoles(roleRef));
         }
     }
 

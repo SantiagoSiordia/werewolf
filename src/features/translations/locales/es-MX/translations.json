@@ -52,7 +52,8 @@
     "players": "jugadores",
     "role assignation": "asignación de roles",
     "save changes": "guardar cambios",
-    "selected cards": "cartas seleccionadas"
+    "selected cards": "cartas seleccionadas",
+    "select a role": "Selecciona un rol"
   },
   "roles": {
     "hunter": "cazador",

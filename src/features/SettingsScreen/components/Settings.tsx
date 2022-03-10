@@ -3,8 +3,8 @@ import { ErrorScreen, LoadingScreen, useAppTranslation } from "@features";
 import { useGame, useRoles } from "@services";
 import { useFormik } from "formik";
 import React, { FC, useMemo, useState } from "react";
-import { FlatListProps, StyleSheet, Text, View } from "react-native";
-import { FlatList, ScrollView } from "react-native-gesture-handler";
+import { StyleSheet, Text, View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { FlatGrid } from "react-native-super-grid";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { Draggable } from "./Draggable";
@@ -18,7 +18,7 @@ export interface SettingsProps {
 
 const initialValues: Game = {
     moderator: "",
-    numberOfPlayers: "",
+    numberOfPlayers: 0,
     balance: 0,
     players: [],
 }
@@ -41,15 +41,6 @@ export const Settings: FC<SettingsProps> = ({
             console.log(JSON.stringify(values, null, 2));
         },
     });
-
-    const renderDraggables: FlatListProps<number>["renderItem"] = ({ item }) => {
-        return <View style={{ paddingRight: 8 }}>
-            <Draggable 
-                text={"wolf " + item}
-                variant="blue"
-            />
-        </View>
-    }
 
     const playerInputsArray = useMemo(() => Array.from({ length: +gameForm.values.numberOfPlayers}, (_, i) => i), [gameForm.values.numberOfPlayers])
 
@@ -97,18 +88,6 @@ export const Settings: FC<SettingsProps> = ({
         </>}
 
         <Text style={styles.sectionTitle}>{t("settings.role assignation")}</Text>
-        <Text style={styles.instructions}>{t("settings.Drag the roles into the blanks")}</Text>
-
-        <FlatList
-            data={playerInputsArray}
-            initialNumToRender={4}
-            renderItem={renderDraggables}
-            keyExtractor={(_, i) => `draggable_${i}`}
-            contentContainerStyle={{ flexDirection: "row" }}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            bounces
-        />
     
         {playerInputsArray.map((_, i) => {
             return <PlayerInput key={`player_input_${i}`} gameForm={gameForm} index={i} />

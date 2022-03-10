@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { StyleSheet, Text, TextInput, TextInputProps, View } from "react-native";
+import { Platform, StyleSheet, Text, TextInput, TextInputProps, View } from "react-native";
 
 type WwInputProps = TextInputProps & {
     name: string;
@@ -9,7 +9,7 @@ type WwInputProps = TextInputProps & {
     icon?: React.ReactElement;
     width?: number | string;
     disableLabel?: boolean;
-  };
+};
 
 export const WwInput: FC<WwInputProps> = ({
     icon,
@@ -34,6 +34,7 @@ export const WwInput: FC<WwInputProps> = ({
           style={StyleSheet.flatten([
             formStyles.inputContainer,
             error ? formStyles.inputContainerError : {},
+            Platform.OS === "ios" ? formStyles.ios : {}
           ])}>
           {icon && <View style={formStyles.iconContainer}>
             {icon}
@@ -45,7 +46,7 @@ export const WwInput: FC<WwInputProps> = ({
               icon ? { } : {}
             ])}
             placeholder={placeholder ?? name}
-            placeholderTextColor="#75757F"
+            placeholderTextColor="white"
             {...props}
           />
         </View>
@@ -63,7 +64,7 @@ export const WwInput: FC<WwInputProps> = ({
       marginLeft: 8,
     },
     inputContainer: {
-      backgroundColor: 'white',
+      backgroundColor: '#292d3e',
       borderRadius: 8,
       flexDirection: 'row',
       borderColor: "#42b4ff",
@@ -77,7 +78,8 @@ export const WwInput: FC<WwInputProps> = ({
     },
     input: {
       width: '80%',
-      textAlign: "center"
+      textAlign: "center",
+      color: "white",
     },
     errorMessage: {
       color: '#c42348',
@@ -91,4 +93,7 @@ export const WwInput: FC<WwInputProps> = ({
     errorTextColor: {
       color: '#c42348',
     },
+    ios: {
+      paddingVertical: 16
+    }
   });

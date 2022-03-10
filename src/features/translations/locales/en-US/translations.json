@@ -52,7 +52,8 @@
     "players": "players",
     "role assignation": "role assignation",
     "save changes": "save changes",
-    "selected cards": "selected cards"
+    "selected cards": "selected cards",
+    "select a role": "Select a role"
   },
   "roles": {
     "HUNTER": "hunter",

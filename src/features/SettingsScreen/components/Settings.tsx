@@ -50,12 +50,12 @@ export const Settings: FC<SettingsProps> = ({
 
     const playerInputsArray = useMemo(() => Array.from({ length: +gameForm.values.numberOfPlayers}, (_, i) => i), [gameForm.values.numberOfPlayers])
     
-    const allAvailRoles = useAppSelector(state => state.assignableRoles.allAssignableRoles);
+    const allAssignableRoles = useAppSelector(state => state.assignableRoles.allAssignableRoles);
     const numberOfAssignableRole = useAppSelector(state => state.assignableRoles.numberOfAssignableRole);
     const noRolesAvailable = numberOfAssignableRole < 1;
 
     const areCardsVisible = gameForm.values.numberOfPlayers > 0;
-    const isAssignationVisible = areCardsVisible && allAvailRoles.length > 0;
+    const isAssignationVisible = areCardsVisible && allAssignableRoles.length > 0;
 
     return <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles.sectionTitle}>{t("settings.players")}</Text>
@@ -77,10 +77,10 @@ export const Settings: FC<SettingsProps> = ({
             </>
         }
 
-        {allAvailRoles.length !== 0 && <>
+        {allAssignableRoles.length !== 0 && <>
             <Text style={styles.sectionTitle}>{t("settings.selected cards")}</Text>
 
-            {allAvailRoles.map((roleRef, index) => {
+            {allAssignableRoles.map((roleRef, index) => {
                 return <SelectedRolesContainer key={roleRef + index} roleRef={roleRef} gameForm={gameForm} />
             })}
         </>}

@@ -25,14 +25,12 @@ export const RoleCard: FC<RoleCardProps> = ({
     console.log(areAssignableSpotsAvailable, numberOfAssignableRole, allRoles)
 
     const handleOnPress = () => {
-        if(areAssignableSpotsAvailable) dispatch(addAssignableRole(role.ref));
-        else if(allRoles.includes(role.ref)) dispatch(removeAssignableRole(role.ref));
+        if(allRoles.includes(role.ref)) dispatch(removeAssignableRole(role.ref))
+        else if(areAssignableSpotsAvailable) dispatch(addAssignableRole(role.ref));
     }
-
-    const isDisabled = areAssignableSpotsAvailable && !allRoles.includes(role.ref);
     
     return ( 
-        <Pressable onPress={handleOnPress} disabled={isDisabled}>
+        <Pressable onPress={handleOnPress}>
             <Image
                 source={{ uri: role.image }}
                 style={StyleSheet.flatten([styles.characterImage, {

@@ -22,8 +22,6 @@ export const RoleCard: FC<RoleCardProps> = ({
 
     const { t } = useAppTranslation();
 
-    console.log(areAssignableSpotsAvailable, numberOfAssignableRole, allRoles)
-
     const handleOnPress = () => {
         if(allRoles.includes(role.ref)) dispatch(removeAssignableRole(role.ref))
         else if(areAssignableSpotsAvailable) dispatch(addAssignableRole(role.ref));

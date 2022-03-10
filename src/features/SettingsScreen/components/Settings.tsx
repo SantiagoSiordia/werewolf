@@ -50,9 +50,9 @@ export const Settings: FC<SettingsProps> = ({
 
     const playerInputsArray = useMemo(() => Array.from({ length: +gameForm.values.numberOfPlayers}, (_, i) => i), [gameForm.values.numberOfPlayers])
     
-    const allAvailRoles = useAppSelector(state => state.roles.allRoles);
-    const numberOfAvailableRoles = useAppSelector(state => state.roles.numberOfAvailableRoles);
-    const noRolesAvailable = numberOfAvailableRoles < 1;
+    const allAvailRoles = useAppSelector(state => state.assignableRoles.allAssignableRole);
+    const numberOfAssignableRole = useAppSelector(state => state.assignableRoles.numberOfAssignableRole);
+    const noRolesAvailable = numberOfAssignableRole < 1;
 
     const areCardsVisible = gameForm.values.numberOfPlayers > 0;
     const isAssignationVisible = areCardsVisible && allAvailRoles.length > 0;

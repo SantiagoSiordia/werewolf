@@ -3,7 +3,7 @@ import { Image, Pressable, StyleSheet, Text } from "react-native";
 import { useDispatch } from "react-redux";
 import { RoleCloudFirestore } from "~/src/services";
 import { useAppSelector } from "../../redux";
-import { addAvailableRole, removeAvailableRole } from "../../redux/availableRoles";
+import { addAssignableRole, removeAssignableRole } from "../../redux/assignableRoles";
 import { useAppTranslation } from "../../translations";
 
 export interface RoleCardProps { 
@@ -14,23 +14,24 @@ export const RoleCard: FC<RoleCardProps> = ({
     role,
 }) => {
 
-    const allRoles = useAppSelector(state => state.roles.allRoles);
-    const numberOfAvailableRoles = useAppSelector(state => state.roles.numberOfAvailableRoles);
-    const noRolesAvailable = numberOfAvailableRoles < 1;
+    const allRoles = useAppSelector(state => state.assignableRoles.allAssignableRole);
+    const numberOfAssignableRole = useAppSelector(state => state.assignableRoles.numberOfAssignableRole);
+    const thereAreRolesAvailable = numberOfAssignableRole > 0;
 
     const dispatch = useDispatch();
 
     const { t } = useAppTranslation();
 
+    console.log(thereAreRolesAvailable, numberOfAssignableRole, allRoles)
+
     const handleOnPress = () => {
-        if(noRolesAvailable) {
-            if(allRoles.includes(role.ref)) dispatch(removeAvailableRole(role.ref))
-        } else dispatch(addAvailableRole(role.ref));
+        if(thereAreRolesAvailable) dispatch(addAssignableRole(role.ref));
+        else if(allRoles.includes(role.ref)) dispatch(removeAssignableRole(role.ref));
     }
 
-    const isDisabled = noRolesAvailable && !allRoles.includes(role.ref);
+    const isDisabled = thereAreRolesAvailable && !allRoles.includes(role.ref);
     
-    return (
+    return ( 
         <Pressable onPress={handleOnPress} disabled={isDisabled}>
             <Image
                 source={{ uri: role.image }}

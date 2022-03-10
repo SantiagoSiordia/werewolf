@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { useDispatch } from "react-redux";
 import { WwInput } from "~/src/components";
-import { clearAvailableRoles, setNumberOfAvailableRoles } from "../../redux/availableRoles";
+import { clearAssignableRoles, setNumberOfAssignableRoles } from "../../redux/assignableRoles";
 import { useAppTranslation } from "../../translations";
 
 export interface NumberOfPlayersInputProps {
@@ -27,8 +27,8 @@ export const NumberOfPlayersInput: FC<NumberOfPlayersInputProps> = ({
             value={gameForm.values.numberOfPlayers + ""}
             onChangeText={ (value) => {
                 gameForm.handleChange('numberOfPlayers')(value)
-                dispatch(setNumberOfAvailableRoles(+value))
-                dispatch(clearAvailableRoles())
+                dispatch(setNumberOfAssignableRoles(+value))
+                dispatch(clearAssignableRoles())
             }}
             onBlur={gameForm.handleBlur('numberOfPlayers')}
             error={gameForm.touched.numberOfPlayers && !!gameForm.errors.numberOfPlayers}

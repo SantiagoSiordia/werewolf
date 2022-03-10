@@ -19,7 +19,7 @@ export const SelectedRolesContainer: FC<SelectedRolesContainerProps> = ({
     const [ count, setCount ] = useState<number>(1);
     const { t } = useAppTranslation();
     const { data: singleRole, isLoading, isError } = useRole(roleRef);
-    const numberOfAvailableRoles = useAppSelector(state => state.roles.numberOfAvailableRoles);
+    const numberOfAssignableRole = useAppSelector(state => state.assignableRoles.numberOfAssignableRole);
 
     if( isLoading || isError) return null;
 

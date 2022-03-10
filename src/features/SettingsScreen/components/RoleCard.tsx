@@ -1,33 +1,36 @@
 import React, { FC } from "react";
 import { Image, Pressable, StyleSheet, Text } from "react-native";
+import { useDispatch } from "react-redux";
 import { RoleCloudFirestore } from "~/src/services";
+import { useAppSelector } from "../../redux";
+import { addAvailableRole, removeAvailableRole } from "../../redux/availableRoles";
 import { useAppTranslation } from "../../translations";
 
 export interface RoleCardProps { 
     role: RoleCloudFirestore;
-    setSelectedRoles: React.Dispatch<React.SetStateAction<string[]>>;
-    selectedRoles: string[]
  }
 
 export const RoleCard: FC<RoleCardProps> = ({
     role,
-    setSelectedRoles,
-    selectedRoles
 }) => {
 
-    const { t } = useAppTranslation(); 
+    const allRoles = useAppSelector(state => state.roles.allRoles);
+
+    const dispatch = useDispatch();
+
+    const { t } = useAppTranslation();
+
+    const handleOnPress = () => {
+        if (allRoles.includes(role.ref)) dispatch(removeAvailableRole(role.ref));
+        else dispatch(addAvailableRole(role.ref));
+    }
+    
     return (
-        <Pressable onPress={() => {
-            if (selectedRoles.includes(role.ref)) {
-                setSelectedRoles(prev => prev.filter(prevRole => prevRole !== role.ref));
-            } else {
-                setSelectedRoles(prev => Array.from(new Set([...prev, role.ref])));
-            }
-        } }>
+        <Pressable onPress={handleOnPress}>
             <Image
                 source={{ uri: role.image }}
                 style={StyleSheet.flatten([styles.characterImage, {
-                    opacity: selectedRoles.includes(role.ref) ? 1 : 0.5
+                    opacity: allRoles.includes(role.ref) ? 1 : 0.5
                 }])} />
             <Text style={styles.roleText}>{t("roles." + role.ref)}</Text>
         </Pressable>

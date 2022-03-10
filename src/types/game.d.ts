@@ -9,4 +9,5 @@ declare interface Game {
     players: Array<Player>
     numberOfPlayers: number | "";
     balance: number;
+    allRoles: Array<RoleCloudFirestore>
 }

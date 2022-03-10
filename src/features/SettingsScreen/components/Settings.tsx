@@ -1,12 +1,13 @@
-import { WwButton, WwInput } from "@components";
+import { WwButton } from "@components";
 import { ErrorScreen, LoadingScreen, useAppTranslation } from "@features";
 import { useGame, useRoles } from "@services";
 import { useFormik } from "formik";
-import React, { FC, useMemo, useState } from "react";
+import React, { FC, useMemo } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { FlatGrid } from "react-native-super-grid";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { useAppSelector } from "../../redux";
+import { NumberOfPlayersInput } from "./NumberOfPlayersInput";
 import { PlayerInput } from "./PlayerInput";
 import { RoleCard } from "./RoleCard";
 import { SelectedRolesContainer } from "./SelectedRoleQuantity";
@@ -20,6 +21,7 @@ const initialValues: Game = {
     numberOfPlayers: "",
     balance: 0,
     players: [],
+    allRoles: []
 }
 
 export const Settings: FC<SettingsProps> = ({
@@ -31,8 +33,6 @@ export const Settings: FC<SettingsProps> = ({
     const { data: game, isLoading: isGameLoading, isError: isGameError } = useGame(gameKey);
     const { data: allRoles } = useRoles();
 
-    const [ selectedRoles, setSelectedRoles ] = useState<Array<string>>([]);
-
     const gameForm = useFormik<Game>({
         initialValues,
         enableReinitialize: true,
@@ -41,54 +41,54 @@ export const Settings: FC<SettingsProps> = ({
         },
     });
 
-    const playerInputsArray = useMemo(() => Array.from({ length: +gameForm.values.numberOfPlayers}, (_, i) => i), [gameForm.values.numberOfPlayers])
-
+    
     if(isGameLoading) return <LoadingScreen message={t("general purpose.game")} />
-
+    
     if(isGameError) return <ErrorScreen message={t("error.keys.game")} />
-
+    
     if(game == undefined) return null;
+
+    const playerInputsArray = useMemo(() => Array.from({ length: +gameForm.values.numberOfPlayers}, (_, i) => i), [gameForm.values.numberOfPlayers])
+    
+    const allAvailRoles = useAppSelector(state => state.roles.allRoles);
+    const numberOfPlayers = useAppSelector(state => state.game.currentGame.numberOfPlayers);
+
+    const areCardsVisible = gameForm.values.numberOfPlayers > 0;
+    const isAssignationVisible = areCardsVisible && allAvailRoles.length > 0;
 
     return <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles.sectionTitle}>{t("settings.players")}</Text>
-        <View style={styles.numberOfPlayersInput}>
-            <Text style={styles.numberOfPlayersText}>{t("settings.number of players")}</Text>
-            <WwInput
-                keyboardType="number-pad"
-                name={t("general purpose.number")}
-                value={gameForm.values.numberOfPlayers + ""}
-                onChangeText={gameForm.handleChange('numberOfPlayers')}
-                onBlur={gameForm.handleBlur('numberOfPlayers')}
-                error={gameForm.touched.numberOfPlayers && !!gameForm.errors.numberOfPlayers}
-                errorMessage={gameForm.errors.numberOfPlayers}
-                width={100}
-                disableLabel
-                icon={<Icon name="format-list-numbered" color="#42b4ff" size={16} />}
-            />
-        </View>
+        <NumberOfPlayersInput gameForm={gameForm} />
 
-        <Text style={styles.sectionTitle}>{t("settings.cards")}</Text>
-        
-        {allRoles !== undefined && <FlatGrid
-            itemDimension={90}
-            scrollEnabled={false}
-            data={allRoles}
-            renderItem={({ item }) => {
-                return <RoleCard setSelectedRoles={setSelectedRoles} role={item} selectedRoles={selectedRoles} />
-            }}
-        />}
+        {
+            areCardsVisible && <>
+                <Text style={styles.sectionTitle}>{t("settings.cards")}</Text>
+                
+                {allRoles !== undefined && <FlatGrid
+                    itemDimension={90}
+                    scrollEnabled={false}
+                    data={allRoles}
+                    renderItem={({ item }) => {
+                        return <RoleCard role={item} />
+                    }}
+                />}
+            </>
+        }
 
-        {selectedRoles.length !== 0 && <>
+        {allAvailRoles.length !== 0 && <>
             <Text style={styles.sectionTitle}>{t("settings.selected cards")}</Text>
 
-            {selectedRoles.map((roleRef, index) => {
+            {allAvailRoles.map((roleRef, index) => {
                 return <SelectedRolesContainer key={roleRef + index} roleRef={roleRef} />
             })}
         </>}
 
-        <Text style={styles.sectionTitle}>{t("settings.role assignation")}</Text>
-    
-        {playerInputsArray.map((_, i) => <PlayerInput key={`player_input_${i}`} gameForm={gameForm} index={i} />)}
+        {
+            isAssignationVisible && <>
+                <Text style={styles.sectionTitle}>{t("settings.role assignation")}</Text>
+                {playerInputsArray.map((_, i) => <PlayerInput key={`player_input_${i}`} gameForm={gameForm} index={i} />)}
+            </>
+        }
         
         <View style={{ flex: 1 }} />
         <View style={{ marginVertical: 16 }}>
@@ -119,17 +119,6 @@ const styles = StyleSheet.create({
     },
     instructions: {
         color: "white"
-    },
-    numberOfPlayersInput: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        padding: 4,
-        alignItems: "center"
-    },
-    numberOfPlayersText: {
-        color: "white",
-        textTransform: "uppercase",
-        fontSize: 16,
     },
     itemCode: {
         fontWeight: '600',

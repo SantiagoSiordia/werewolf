@@ -1,10 +1,12 @@
 import firestore from '@react-native-firebase/firestore';
 import { COLLECTIONS } from './COLLECTIONS';
 
-export interface RoleCloudFirestore {
-    name: string,
+export type RoleNamesRef = 'wolf' | 'seer' | 'hunter' | 'bodyguard' | 'villager' | 'wolf cub'
+
+export declare interface RoleCloudFirestore {
+    name: RoleNamesRef,
     points: number,
-    ref: string
+    ref: RoleNamesRef
     image: string;
     maxPerGame?: number;
     minPerGame?: number;

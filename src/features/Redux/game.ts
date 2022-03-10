@@ -1,17 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export type InitialState = {
+export type GameInitialState = {
     currentGame: Game;
     currentGameId: string;
 }
 
-const initialState: InitialState = {
+const initialState: GameInitialState = {
     currentGameId: "",
     currentGame: {
         moderator: "",
         players: [],
         balance: 0,
         numberOfPlayers: 0,
+        allRoles: []
     }
 }
 

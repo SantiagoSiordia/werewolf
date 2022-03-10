@@ -1,37 +1,28 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RoleCloudFirestore } from '~/src/services';
+import { RoleNamesRef } from '~/src/services';
 
-export type InitialState = {
-    availableRoles: RoleCloudFirestore[];
-    pickedRoles: RoleCloudFirestore[];
-    allRoles: RoleCloudFirestore[];
+export type RolesInitialState = {
+    allRoles: Array<RoleNamesRef>;
 }
 
-const initialState: InitialState = {
-    availableRoles: [],
-    pickedRoles: [],
+const initialState: RolesInitialState = {
     allRoles: [],
 }
 
 const availableRoles = createSlice({
-  name: 'game',
+  name: 'roles',
   initialState,
   reducers: {
-    addAvailableRole: (state, action: PayloadAction<RoleCloudFirestore>) => {
-      state.allRoles = [ ...state.availableRoles, action.payload ];
-      state.availableRoles = [ ...state.availableRoles, action.payload ];
+    addAvailableRole: (state, action: PayloadAction<RoleNamesRef>) => {
+      if(state.allRoles.includes(action.payload)) return;
+      state.allRoles = [ ...state.allRoles, action.payload ]
     },
-    pickRole: (state, action: PayloadAction<string>) => {
-      state.availableRoles = [ ...state.availableRoles.filter(role => role.ref === action.payload) ];
-      state.pickedRoles = [ ...state.availableRoles.filter(role => role.ref !== action.payload) ];
-    },
-    removeRole: (state, action: PayloadAction<string>) => {
-        state.availableRoles = [ ...state.availableRoles.filter(role => role.ref === action.payload) ];
-        state.pickedRoles = [ ...state.availableRoles.filter(role => role.ref !== action.payload) ];
-      },
+    removeAvailableRole: (state, action: PayloadAction<RoleNamesRef>) => {
+      state.allRoles = state.allRoles.filter(role => role !== action.payload);
+    }
   }
 })
 
-export const { addAvailableRole } = availableRoles.actions
+export const { addAvailableRole, removeAvailableRole } = availableRoles.actions
 
 export default availableRoles.reducer;

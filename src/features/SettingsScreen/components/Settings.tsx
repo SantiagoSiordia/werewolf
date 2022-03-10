@@ -50,7 +50,7 @@ export const Settings: FC<SettingsProps> = ({
 
     const playerInputsArray = useMemo(() => Array.from({ length: +gameForm.values.numberOfPlayers}, (_, i) => i), [gameForm.values.numberOfPlayers])
     
-    const allAvailRoles = useAppSelector(state => state.assignableRoles.allAssignableRole);
+    const allAvailRoles = useAppSelector(state => state.assignableRoles.allAssignableRoles);
     const numberOfAssignableRole = useAppSelector(state => state.assignableRoles.numberOfAssignableRole);
     const noRolesAvailable = numberOfAssignableRole < 1;
 

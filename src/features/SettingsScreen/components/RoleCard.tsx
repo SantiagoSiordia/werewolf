@@ -14,22 +14,22 @@ export const RoleCard: FC<RoleCardProps> = ({
     role,
 }) => {
 
-    const allRoles = useAppSelector(state => state.assignableRoles.allAssignableRole);
+    const allRoles = useAppSelector(state => state.assignableRoles.allAssignableRoles);
     const numberOfAssignableRole = useAppSelector(state => state.assignableRoles.numberOfAssignableRole);
-    const thereAreRolesAvailable = numberOfAssignableRole > 0;
+    const areAssignableSpotsAvailable = numberOfAssignableRole > 0;
 
     const dispatch = useDispatch();
 
     const { t } = useAppTranslation();
 
-    console.log(thereAreRolesAvailable, numberOfAssignableRole, allRoles)
+    console.log(areAssignableSpotsAvailable, numberOfAssignableRole, allRoles)
 
     const handleOnPress = () => {
-        if(thereAreRolesAvailable) dispatch(addAssignableRole(role.ref));
+        if(areAssignableSpotsAvailable) dispatch(addAssignableRole(role.ref));
         else if(allRoles.includes(role.ref)) dispatch(removeAssignableRole(role.ref));
     }
 
-    const isDisabled = thereAreRolesAvailable && !allRoles.includes(role.ref);
+    const isDisabled = areAssignableSpotsAvailable && !allRoles.includes(role.ref);
     
     return ( 
         <Pressable onPress={handleOnPress} disabled={isDisabled}>

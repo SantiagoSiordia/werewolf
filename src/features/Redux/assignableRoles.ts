@@ -2,12 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RoleNamesRef } from '~/src/services';
 
 export type RolesInitialState = {
-    allAssignableRole: Array<RoleNamesRef>;
+    allAssignableRoles: Array<RoleNamesRef>;
     numberOfAssignableRole: number;
 }
 
 const initialState: RolesInitialState = {
-  allAssignableRole: [],
+  allAssignableRoles: [],
   numberOfAssignableRole: 0
 }
 
@@ -16,16 +16,16 @@ const assignableRoles = createSlice({
   initialState,
   reducers: {
     addAssignableRole: (state, action: PayloadAction<RoleNamesRef>) => {
-      if(state.allAssignableRole.includes(action.payload)) return;
-      state.allAssignableRole = [ ...state.allAssignableRole, action.payload ];
+      if(state.allAssignableRoles.includes(action.payload)) return;
+      state.allAssignableRoles = [ ...state.allAssignableRoles, action.payload ];
       state.numberOfAssignableRole = state.numberOfAssignableRole - 1;
     },
     removeAssignableRole: (state, action: PayloadAction<RoleNamesRef>) => {
-      state.allAssignableRole = state.allAssignableRole.filter(role => role !== action.payload);
+      state.allAssignableRoles = state.allAssignableRoles.filter(role => role !== action.payload);
       state.numberOfAssignableRole = state.numberOfAssignableRole + 1;
     },
     clearAssignableRoles: (state) => {
-      state.allAssignableRole = [];
+      state.allAssignableRoles = [];
     },
     decreaseAssignableRoles: (state) => {
       state.numberOfAssignableRole = state.numberOfAssignableRole - 1;

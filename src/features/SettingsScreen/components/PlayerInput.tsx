@@ -5,6 +5,7 @@ import React, { FC, useState } from "react";
 import { Dimensions, StyleSheet, Text, View } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { useAppSelector } from "../../redux";
 
 const screenWidth = Dimensions.get('screen').width
 export interface PlayerInputProps {
@@ -33,6 +34,15 @@ export const PlayerInput: FC<PlayerInputProps> = ({
         gameForm.setFieldValue(`players[${index}].role`, data.dragged.payload.role);
         setPlayerRole({ ...data.dragged.payload })
     }
+
+    const noSetRoles = useAppSelector(state => state.assignableRoles.availableRoles);
+    const arrayNoSetRoles = Object.entries(noSetRoles).flatMap(([key, value]) => {
+        const accRoles = []
+        for(let i = 0; i < value; i++) accRoles.push(key);
+        return accRoles;
+    })
+    const arraySetRoles = Array.from(new Set(arrayNoSetRoles));
+    const arrayOfItems = arraySetRoles.map(element => ({ label: element, value: element }))
 
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState('');
@@ -68,7 +78,7 @@ export const PlayerInput: FC<PlayerInputProps> = ({
                 theme="DARK"
                 open={open}
                 value={value}
-                items={items}
+                items={arrayOfItems}
                 setOpen={setOpen}
                 // @ts-expect-error
                 setValue={setValue}

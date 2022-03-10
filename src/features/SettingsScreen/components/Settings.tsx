@@ -7,7 +7,6 @@ import { StyleSheet, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { FlatGrid } from "react-native-super-grid";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { Draggable } from "./Draggable";
 import { PlayerInput } from "./PlayerInput";
 import { RoleCard } from "./RoleCard";
 import { SelectedRolesContainer } from "./SelectedRoleQuantity";
@@ -18,7 +17,7 @@ export interface SettingsProps {
 
 const initialValues: Game = {
     moderator: "",
-    numberOfPlayers: 0,
+    numberOfPlayers: "",
     balance: 0,
     players: [],
 }
@@ -89,9 +88,7 @@ export const Settings: FC<SettingsProps> = ({
 
         <Text style={styles.sectionTitle}>{t("settings.role assignation")}</Text>
     
-        {playerInputsArray.map((_, i) => {
-            return <PlayerInput key={`player_input_${i}`} gameForm={gameForm} index={i} />
-        })}
+        {playerInputsArray.map((_, i) => <PlayerInput key={`player_input_${i}`} gameForm={gameForm} index={i} />)}
         
         <View style={{ flex: 1 }} />
         <View style={{ marginVertical: 16 }}>

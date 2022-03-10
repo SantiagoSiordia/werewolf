@@ -53,7 +53,8 @@
     "role assignation": "role assignation",
     "save changes": "save changes",
     "selected cards": "selected cards",
-    "select a role": "Select a role"
+    "select a role": "Select a role",
+    "no roles available": "no roles available"
   },
   "roles": {
     "HUNTER": "hunter",

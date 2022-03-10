@@ -1,20 +1,25 @@
+import { FormikProps } from "formik";
 import React, { FC, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useRole } from "~/src/services/queries/useRole";
+import { useAppSelector } from "../../redux";
 import { useAppTranslation } from "../../translations";
 
 export interface SelectedRolesContainerProps {
     roleRef: string;
+    gameForm: FormikProps<Game>
 }
 
 export const SelectedRolesContainer: FC<SelectedRolesContainerProps> = ({
     roleRef,
+    gameForm
 }) => {
 
     const [ count, setCount ] = useState<number>(1);
     const { t } = useAppTranslation();
     const { data: singleRole, isLoading, isError } = useRole(roleRef);
+    const numberOfAvailableRoles = useAppSelector(state => state.roles.numberOfAvailableRoles);
 
     if( isLoading || isError) return null;
 

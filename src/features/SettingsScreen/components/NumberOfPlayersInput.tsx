@@ -2,7 +2,9 @@ import { FormikProps } from "formik";
 import React, { FC } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { useDispatch } from "react-redux";
 import { WwInput } from "~/src/components";
+import { clearAvailableRoles, setNumberOfAvailableRoles } from "../../redux/availableRoles";
 import { useAppTranslation } from "../../translations";
 
 export interface NumberOfPlayersInputProps {
@@ -15,13 +17,19 @@ export const NumberOfPlayersInput: FC<NumberOfPlayersInputProps> = ({
 
     const { t } = useAppTranslation();
 
+    const dispatch = useDispatch();
+
     return <View style={styles.numberOfPlayersInput}>
         <Text style={styles.numberOfPlayersText}>{t("settings.number of players")}</Text>
         <WwInput
             keyboardType="number-pad"
             name={t("general purpose.number")}
             value={gameForm.values.numberOfPlayers + ""}
-            onChangeText={gameForm.handleChange('numberOfPlayers')}
+            onChangeText={ (value) => {
+                gameForm.handleChange('numberOfPlayers')(value)
+                dispatch(setNumberOfAvailableRoles(+value))
+                dispatch(clearAvailableRoles())
+            }}
             onBlur={gameForm.handleBlur('numberOfPlayers')}
             error={gameForm.touched.numberOfPlayers && !!gameForm.errors.numberOfPlayers}
             errorMessage={gameForm.errors.numberOfPlayers}

@@ -53,7 +53,8 @@
     "role assignation": "asignación de roles",
     "save changes": "guardar cambios",
     "selected cards": "cartas seleccionadas",
-    "select a role": "Selecciona un rol"
+    "select a role": "Selecciona un rol",
+    "no roles available": "no hay roles disponibles"
   },
   "roles": {
     "hunter": "cazador",

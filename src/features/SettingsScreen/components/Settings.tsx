@@ -51,7 +51,8 @@ export const Settings: FC<SettingsProps> = ({
     const playerInputsArray = useMemo(() => Array.from({ length: +gameForm.values.numberOfPlayers}, (_, i) => i), [gameForm.values.numberOfPlayers])
     
     const allAvailRoles = useAppSelector(state => state.roles.allRoles);
-    const numberOfPlayers = useAppSelector(state => state.game.currentGame.numberOfPlayers);
+    const numberOfAvailableRoles = useAppSelector(state => state.roles.numberOfAvailableRoles);
+    const noRolesAvailable = numberOfAvailableRoles < 1;
 
     const areCardsVisible = gameForm.values.numberOfPlayers > 0;
     const isAssignationVisible = areCardsVisible && allAvailRoles.length > 0;
@@ -63,6 +64,7 @@ export const Settings: FC<SettingsProps> = ({
         {
             areCardsVisible && <>
                 <Text style={styles.sectionTitle}>{t("settings.cards")}</Text>
+                {noRolesAvailable && <Text style={styles.sectionInfo}>{t("settings.no roles available")}</Text>}
                 
                 {allRoles !== undefined && <FlatGrid
                     itemDimension={90}
@@ -79,7 +81,7 @@ export const Settings: FC<SettingsProps> = ({
             <Text style={styles.sectionTitle}>{t("settings.selected cards")}</Text>
 
             {allAvailRoles.map((roleRef, index) => {
-                return <SelectedRolesContainer key={roleRef + index} roleRef={roleRef} />
+                return <SelectedRolesContainer key={roleRef + index} roleRef={roleRef} gameForm={gameForm} />
             })}
         </>}
 
@@ -136,4 +138,9 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontWeight: '600',
     },
+    sectionInfo: {
+        fontSize: 16,
+        textTransform: 'uppercase',
+        color: "white"
+    }
 })

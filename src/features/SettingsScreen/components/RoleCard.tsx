@@ -15,18 +15,23 @@ export const RoleCard: FC<RoleCardProps> = ({
 }) => {
 
     const allRoles = useAppSelector(state => state.roles.allRoles);
+    const numberOfAvailableRoles = useAppSelector(state => state.roles.numberOfAvailableRoles);
+    const noRolesAvailable = numberOfAvailableRoles < 1;
 
     const dispatch = useDispatch();
 
     const { t } = useAppTranslation();
 
     const handleOnPress = () => {
-        if (allRoles.includes(role.ref)) dispatch(removeAvailableRole(role.ref));
-        else dispatch(addAvailableRole(role.ref));
+        if(noRolesAvailable) {
+            if(allRoles.includes(role.ref)) dispatch(removeAvailableRole(role.ref))
+        } else dispatch(addAvailableRole(role.ref));
     }
+
+    const isDisabled = noRolesAvailable && !allRoles.includes(role.ref);
     
     return (
-        <Pressable onPress={handleOnPress}>
+        <Pressable onPress={handleOnPress} disabled={isDisabled}>
             <Image
                 source={{ uri: role.image }}
                 style={StyleSheet.flatten([styles.characterImage, {

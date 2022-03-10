@@ -1,30 +1,14 @@
-import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-export type InitialState = {
-    currentGame: Game;
-    currentGameId: string;
-}
+import { combineReducers } from '@reduxjs/toolkit';
+import { createSelectorHook } from 'react-redux';
+import gameReducer from './game';
 
-const initialState: InitialState = {
-    currentGameId: "",
-    currentGame: {
-        moderator: "",
-        players: []
-    }
-}
+const rootReducer = combineReducers({
+  game: gameReducer,
+});
 
-const counterSlice = createSlice({
-  name: 'counter',
-  initialState,
-  reducers: {
-    setCurrentGameId: (state, action: PayloadAction<string>) => {
-      state.currentGameId = action.payload
-    },
-  }
-})
+export type RootState = ReturnType<typeof rootReducer>;
 
-export const { setCurrentGameId } = counterSlice.actions
+export const useAppSelector = createSelectorHook<RootState>();
 
-export const store = configureStore({
-  reducer: counterSlice.reducer
-})
+export default rootReducer;

@@ -7,6 +7,6 @@ declare interface Player {
 declare interface Game {
     moderator: string;
     players: Array<Player>
-    numberOfPlayers: string;
+    numberOfPlayers: number;
     balance: number;
 }

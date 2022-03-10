@@ -1,11 +1,14 @@
 import { WwInput } from "@components";
 import { useAppTranslation } from "@features";
 import { FormikProps } from "formik";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Dimensions, StyleSheet, Text, View } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { useDispatch } from "react-redux";
+import { RoleNamesRef } from "~/src/services";
 import { useAppSelector } from "../../redux";
+import { assignRole } from "../../redux/assignableRoles";
 
 const screenWidth = Dimensions.get('screen').width
 export interface PlayerInputProps {
@@ -25,33 +28,23 @@ export const PlayerInput: FC<PlayerInputProps> = ({
 
     const { t } = useAppTranslation();
 
-    const [ playerRole, setPlayerRole ] = useState<PlayerRole>({
-        role: "",
-        color: ""
+    const noSetRoles = useAppSelector(state => state.assignableRoles.availableRoles);
+    const allAssignableRoles = useAppSelector(state => state.assignableRoles.allAssignableRoles);
+
+    const dispatch = useDispatch();
+
+    const arrayOfItems = allAssignableRoles.map(element => {
+        const itemDisabled = noSetRoles[element] === undefined || noSetRoles[element] === 0;
+        return { label: element, value: element, disabled: itemDisabled }
     });
 
-    const handleOnReceiveRole = (data: any) => {
-        gameForm.setFieldValue(`players[${index}].role`, data.dragged.payload.role);
-        setPlayerRole({ ...data.dragged.payload })
-    }
-
-    const noSetRoles = useAppSelector(state => state.assignableRoles.availableRoles);
-    const arrayNoSetRoles = Object.entries(noSetRoles).flatMap(([key, value]) => {
-        const accRoles = []
-        for(let i = 0; i < value; i++) accRoles.push(key);
-        return accRoles;
-    })
-    const arraySetRoles = Array.from(new Set(arrayNoSetRoles));
-    const arrayOfItems = arraySetRoles.map(element => ({ label: element, value: element }))
-
     const [open, setOpen] = useState(false);
-    const [value, setValue] = useState('');
-    const [items, setItems] = useState([
-        {label: 'Apple', value: 'apple'},
-        {label: 'Banana', value: 'banana'},
-        {label: 'Test', value: 'test'},
-        {label: 'test 1', value: 'test 1'},
-    ]);
+    const [value, setValue] = useState<RoleNamesRef | ''>('');
+
+    useEffect(() => {
+        gameForm.setFieldValue(`players[${index}].role`, value);
+        if(value !== '') dispatch(assignRole(value));
+    }, [value]);
 
     return <>
         <View style={styles.container}>
@@ -80,9 +73,10 @@ export const PlayerInput: FC<PlayerInputProps> = ({
                 value={value}
                 items={arrayOfItems}
                 setOpen={setOpen}
-                // @ts-expect-error
-                setValue={setValue}
-                setItems={setItems}
+                setValue={(value) => {
+                    // @ts-expect-error
+                    value !== undefined && setValue(value);
+                }}
                 placeholder={t('settings.select a role')}
                 style={styles.dropDown}
                 modalContentContainerStyle={{ zIndex: 100, elevation: 100}}

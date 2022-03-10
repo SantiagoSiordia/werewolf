@@ -59,6 +59,10 @@ const assignableRoles = createSlice({
     },
     setNumberOfAssignableRoles: (state, action: PayloadAction<number>) => {
       state.numberOfAssignableRoles = action.payload
+    },
+    assignRole: (state, action: PayloadAction<RoleNamesRef>) => {
+      const value = state.availableRoles[action.payload];
+      if(value) state.availableRoles[action.payload] = value - 1;
     }
   }
 })
@@ -69,7 +73,8 @@ export const {
   decreaseAssignableRoles,
   increaseAssignableRoles,
   removeAssignableRole,
-  setNumberOfAssignableRoles
+  setNumberOfAssignableRoles,
+  assignRole
 } = assignableRoles.actions
 
 export default assignableRoles.reducer;

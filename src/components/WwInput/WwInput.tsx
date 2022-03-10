@@ -71,13 +71,12 @@ export const WwInput: FC<WwInputProps> = ({
       borderWidth: 1
     },
     iconContainer: {
-      width: "20%",
-      maxWidth: 35,
+      paddingHorizontal: 8,
       alignItems: 'center',
       justifyContent: 'center'
     },
     input: {
-      width: '80%',
+      width: '60%',
       textAlign: "center",
       color: "white",
     },

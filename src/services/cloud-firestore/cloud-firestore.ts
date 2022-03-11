@@ -42,3 +42,15 @@ export const getRole = async (roleRef: string) => {
         throw error
     }
 }
+
+export const setGame = async (gameId: string, game: Game) => {
+    try {
+        await firestore().collection(COLLECTIONS.GAMES)
+            .doc(gameId)
+            .update({
+                ...game
+            });
+    } catch (error) {
+        throw error
+    }
+}

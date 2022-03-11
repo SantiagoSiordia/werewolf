@@ -1,6 +1,6 @@
 import { WwButton } from "@components";
 import { ErrorScreen, LoadingScreen, useAppTranslation } from "@features";
-import { useGame, useRoles } from "@services";
+import { setGame, useGame, useRoles } from "@services";
 import { useFormik } from "formik";
 import React, { FC, useMemo } from "react";
 import { StyleSheet, Text, View } from "react-native";
@@ -36,9 +36,8 @@ export const Settings: FC<SettingsProps> = ({
     const gameForm = useFormik<Game>({
         initialValues,
         enableReinitialize: true,
-        onSubmit: (values, helpers) => {
-            console.log(JSON.stringify(values, null, 2));
-            // i3DrhFPErA8bUDU4gNKO
+        onSubmit: (values) => {
+            setGame("i3DrhFPErA8bUDU4gNKO", values)
         },
     });
 

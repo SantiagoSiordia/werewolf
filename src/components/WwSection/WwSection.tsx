@@ -18,10 +18,12 @@ export const WwSection: FC<WwSectionProps> = ({
     const handleOnSectionPress = () => setIsSectionOpen(prev => !prev)
 
     return <View style={styles.container}>
-        <Pressable style={styles.pressable} onPress={handleOnSectionPress}>
+        <Pressable style={styles.pressable} onPress={handleOnSectionPress} android_ripple={{
+            color: "#42b4ff"
+        }}>
             <Text style={styles.text}>{title}</Text>
             <View style={styles.numberAndArrowContainer}>
-                {displayNumber && <>
+                {displayNumber !== undefined && <>
                     <Text style={styles.text}>{displayNumber}</Text>
                     <View style={{ width: 8 }} />
                 </>}

@@ -1,6 +1,6 @@
 declare interface Player {
     name: string;
-    role: string;
+    role: RoleNamesRef;
     team: "wolves" | "villagers"
 }
 

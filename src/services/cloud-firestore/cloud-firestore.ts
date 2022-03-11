@@ -1,7 +1,7 @@
 import firestore from '@react-native-firebase/firestore';
 import { COLLECTIONS } from './COLLECTIONS';
 
-export type RoleNamesRef = 'wolf' | 'seer' | 'hunter' | 'bodyguard' | 'villager' | 'wolf cub'
+export declare type RoleNamesRef = 'wolf' | 'seer' | 'hunter' | 'bodyguard' | 'villager' | 'wolf cub'
 
 export declare interface RoleCloudFirestore {
     name: RoleNamesRef,

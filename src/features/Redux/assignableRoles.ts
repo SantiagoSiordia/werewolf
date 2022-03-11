@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RoleNamesRef } from '~/src/services';
 
-type PartialRecord<K extends keyof any, T> = {
+export type PartialRecord<K extends keyof any, T> = {
   [P in K]?: T;
 };
 

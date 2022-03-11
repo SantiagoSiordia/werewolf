@@ -35,7 +35,11 @@
     "player roles": "roles de jugadores",
     "total number of players": "número total de jugadores",
     "villagers": "aldeanos",
-    "wolves": "lobos"
+    "wolves": "lobos",
+    "role": "rol",
+    "points": "puntos",
+    "quantity": "cantidad",
+    "total": "total"
   },
   "landing": {
     "welcome to": "bienvenido a"

@@ -35,7 +35,11 @@
     "player roles": "player roles",
     "total number of players": "total number of players",
     "villagers": "villagers",
-    "wolves": "wolves"
+    "wolves": "wolves",
+    "role": "role",
+    "points": "points",
+    "quantity": "quantity",
+    "total": "total"
   },
   "landing": {
     "welcome to": "welcome to"

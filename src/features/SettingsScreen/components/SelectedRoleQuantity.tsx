@@ -24,6 +24,7 @@ export const SelectedRolesContainer: FC<SelectedRolesContainerProps> = ({
     const { data: singleRole, isLoading, isError } = useRole(roleRef);
     const dispatch = useDispatch();
     const numberOfAssignableRoles = useAppSelector(state => state.assignableRoles.numberOfAssignableRoles);
+    const { data: role } = useRole(roleRef)
 
     if( isLoading || isError) return null;
 
@@ -33,14 +34,22 @@ export const SelectedRolesContainer: FC<SelectedRolesContainerProps> = ({
     const handleOnMinus = () => {
         if(isAbleToMinus) {
             setCount(prev => prev - 1);
-            dispatch(increaseAssignableRoles(roleRef));
+            dispatch(increaseAssignableRoles({
+                roleRef: roleRef,
+                // @ts-expect-error is already loaded
+                points: role.points
+            }));
         }
     };
 
     const handleOnPlus = () => {
         if(isAbleToPlus) {
             setCount(prev => prev + 1);
-            dispatch(decreaseAssignableRoles(roleRef));
+            dispatch(decreaseAssignableRoles({
+                roleRef: roleRef,
+                // @ts-expect-error is already loaded
+                points: role.points
+            }));
         }
     }
 

@@ -38,6 +38,7 @@ export const Settings: FC<SettingsProps> = ({
         enableReinitialize: true,
         onSubmit: (values, helpers) => {
             console.log(JSON.stringify(values, null, 2));
+            // i3DrhFPErA8bUDU4gNKO
         },
     });
 
@@ -52,12 +53,28 @@ export const Settings: FC<SettingsProps> = ({
     
     const allAssignableRoles = useAppSelector(state => state.assignableRoles.allAssignableRoles);
     const numberOfAssignableRoles = useAppSelector(state => state.assignableRoles.numberOfAssignableRoles);
+    const gameBalance = useAppSelector(state => state.assignableRoles.balance);
     const noRolesAvailable = numberOfAssignableRoles < 1;
 
     const areCardsVisible = gameForm.values.numberOfPlayers > 0;
     const isAssignationVisible = areCardsVisible && allAssignableRoles.length > 0;
 
+    const handleSaveChanges = () => {
+        gameForm.setValues((prevGame) => {
+            const newGame = {
+                ...prevGame,
+                balance: gameBalance,
+                allRoles: allAssignableRoles,
+                moderator: "Santiago"
+            }
+            return newGame;
+        })
+        gameForm.handleSubmit();
+    }
+
     return <ScrollView showsVerticalScrollIndicator={false}>
+        <Text style={styles.gameBalance}>{t("general purpose.game balance")}: {gameBalance}</Text>
+
         <Text style={styles.sectionTitle}>{t("settings.players")}</Text>
         <NumberOfPlayersInput gameForm={gameForm} />
 
@@ -94,7 +111,7 @@ export const Settings: FC<SettingsProps> = ({
         
         <View style={{ flex: 1 }} />
         <View style={{ marginVertical: 16 }}>
-            <WwButton text={t("settings.save changes")} variant="blue" onPress={() => gameForm.handleSubmit()} />
+            <WwButton text={t("settings.save changes")} variant="blue" onPress={handleSaveChanges} />
         </View>
     </ScrollView>
 }
@@ -142,5 +159,12 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textTransform: 'uppercase',
         color: "white"
+    },
+    gameBalance: {
+        textAlign: 'center',
+        color: "white",
+        fontSize: 24,
+        textTransform: 'uppercase',
+        fontWeight: 'bold'
     }
 })

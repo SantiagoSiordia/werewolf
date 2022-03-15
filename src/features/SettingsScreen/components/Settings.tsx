@@ -55,7 +55,7 @@ export const Settings: FC<SettingsProps> = ({
     const gameBalance = useAppSelector(state => state.assignableRoles.balance);
     const noRolesAvailable = numberOfAssignableRoles < 1;
 
-    const areCardsVisible = gameForm.values.numberOfPlayers > 0;
+    const areCardsVisible = true;
     const isAssignationVisible = areCardsVisible && allAssignableRoles.length > 0;
 
     const handleSaveChanges = () => {
@@ -77,21 +77,16 @@ export const Settings: FC<SettingsProps> = ({
         <Text style={styles.sectionTitle}>{t("settings.players")}</Text>
         <NumberOfPlayersInput gameForm={gameForm} />
 
-        {
-            areCardsVisible && <>
-                <Text style={styles.sectionTitle}>{t("settings.cards")}</Text>
-                {noRolesAvailable && <Text style={styles.sectionInfo}>{t("settings.no roles available")}</Text>}
-                
-                {allRoles !== undefined && <FlatGrid
-                    itemDimension={90}
-                    scrollEnabled={false}
-                    data={allRoles}
-                    renderItem={({ item }) => {
-                        return <RoleCard role={item} />
-                    }}
-                />}
-            </>
-        }
+        <Text style={styles.sectionTitle}>{t("settings.cards")}</Text>
+        
+        {allRoles !== undefined && <FlatGrid
+            itemDimension={90}
+            scrollEnabled={false}
+            data={allRoles}
+            renderItem={({ item }) => {
+                return <RoleCard role={item} />
+            }}
+        />}
 
         {allAssignableRoles.length !== 0 && <>
             <Text style={styles.sectionTitle}>{t("settings.selected cards")}</Text>

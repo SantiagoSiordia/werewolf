@@ -32,6 +32,7 @@ const App: FC = () => {
                     },
                     tabBarActiveTintColor: '#42b4ff',
                     tabBarInactiveTintColor: 'white',
+                    unmountOnBlur: true
                   })}
                   >
                   <Tab.Screen options={() => ({

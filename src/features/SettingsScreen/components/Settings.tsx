@@ -1,11 +1,12 @@
 import { WwButton } from "@components";
 import { ErrorScreen, LoadingScreen, useAppTranslation } from "@features";
-import { setGame, useGame, useRoles } from "@services";
+import { QUERIES, setGame, useGame, useRoles } from "@services";
 import { useFormik } from "formik";
 import React, { FC, useMemo } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { FlatGrid } from "react-native-super-grid";
+import { useQueryClient } from "react-query";
 import { useAppSelector } from "../../redux";
 import { NumberOfPlayersInput } from "./NumberOfPlayersInput";
 import { PlayerInput } from "./PlayerInput";
@@ -32,6 +33,7 @@ export const Settings: FC<SettingsProps> = ({
 
     const { data: game, isLoading: isGameLoading, isError: isGameError } = useGame(gameKey);
     const { data: allRoles } = useRoles();
+    const queryClient = useQueryClient();
 
     const gameForm = useFormik<Game>({
         initialValues,
@@ -51,9 +53,7 @@ export const Settings: FC<SettingsProps> = ({
     const playerInputsArray = useMemo(() => Array.from({ length: +gameForm.values.numberOfPlayers}, (_, i) => i), [gameForm.values.numberOfPlayers])
     
     const allAssignableRoles = useAppSelector(state => state.assignableRoles.allAssignableRoles);
-    const numberOfAssignableRoles = useAppSelector(state => state.assignableRoles.numberOfAssignableRoles);
     const gameBalance = useAppSelector(state => state.assignableRoles.balance);
-    const noRolesAvailable = numberOfAssignableRoles < 1;
 
     const areCardsVisible = true;
     const isAssignationVisible = areCardsVisible && allAssignableRoles.length > 0;
@@ -69,6 +69,8 @@ export const Settings: FC<SettingsProps> = ({
             return newGame;
         })
         gameForm.handleSubmit();
+        queryClient.invalidateQueries(QUERIES.GAME_KEY);
+        queryClient.invalidateQueries([QUERIES.GAME]);
     }
 
     return <ScrollView showsVerticalScrollIndicator={false}>

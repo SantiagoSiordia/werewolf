@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { useQueryClient } from "react-query";
 import { WwButton, WwSection } from "~/src/components";
@@ -22,10 +22,15 @@ export const GameState: FC<GameStateProps> = ({ gameKey }) => {
 
     const queryClient = useQueryClient();
 
+    useEffect(() => {
+        queryClient.invalidateQueries(QUERIES.GAME);
+    }, []);
+
     const handleDeleteGame = async () => {
         try {
             await removeItemFromAsyncStorage(QUERIES.GAME_KEY);
             queryClient.invalidateQueries(QUERIES.GAME_KEY);
+            queryClient.invalidateQueries(QUERIES.GAME);
         } catch (error) {
             throw error
         }

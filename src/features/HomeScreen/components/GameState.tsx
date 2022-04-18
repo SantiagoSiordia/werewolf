@@ -8,6 +8,7 @@ import { QUERIES } from "~/src/services/queries/QUERIES";
 import { ErrorScreen, useAppTranslation } from "../..";
 import { LoadingScreen } from "../../LoadingScreen";
 import { TableRow } from "./TableRow";
+import { UserRoleRow } from "./UserRoleRow";
 
 export interface GameStateProps {
     gameKey: string;
@@ -71,6 +72,14 @@ export const GameState: FC<GameStateProps> = ({ gameKey }) => {
                     return null
                 })}
                 <View style={{ marginTop: 16}}>
+                    {
+                        Array.from(new Set(game.allRoles)).map(gameRole => {
+                            const amount = game.allRoles.reduce((acc, cur) => {
+                                return acc += cur === gameRole ? 1 : 0;
+                            }, 0)
+                            return <UserRoleRow key={"User Role Row " + gameRole} role={gameRole} amount={amount} />;
+                        })
+                    }
                     <TableRow
                         first=""
                         second={t("general purpose.total")} 

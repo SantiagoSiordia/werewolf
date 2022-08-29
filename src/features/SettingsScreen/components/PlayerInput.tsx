@@ -59,27 +59,7 @@ export const PlayerInput: FC<PlayerInputProps> = ({
                 // @ts-expect-error
                 errorMessage={gameForm.errors[`players[${index}].name`]}
                 icon={<Icon name="person" color="#42b4ff" size={16} />}
-                width="50%"
-            />
-            <View style={styles.flex1} />
-            <Text style={styles.isAText}>{t("settings.is a")}</Text>
-            <View style={styles.flex1} />
-        </View>
-        <View style={styles.dropDownContainer}>
-            <DropDownPicker
-                dropDownDirection="TOP"
-                theme="DARK"
-                open={open}
-                value={value}
-                items={arrayOfItems}
-                setOpen={setOpen}
-                setValue={(value) => {
-                    // @ts-expect-error
-                    value !== undefined && setValue(value);
-                }}
-                placeholder={t('settings.select a role')}
-                style={styles.dropDown}
-                modalContentContainerStyle={{ zIndex: 100, elevation: 100}}
+                width="100%"
             />
         </View>
     </>

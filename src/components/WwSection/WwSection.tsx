@@ -27,7 +27,7 @@ export const WwSection: FC<WwSectionProps> = ({
                     <Text style={styles.text}>{displayNumber}</Text>
                     <View style={{ width: 8 }} />
                 </>}
-                <Icon name="chevron-down" color="white" size={24} />
+                <Icon name={isSectionOpen ? "chevron-down" : "chevron-right"} color="white" size={24} />
             </View>
         </Pressable>
         { isSectionOpen ? children : null }
